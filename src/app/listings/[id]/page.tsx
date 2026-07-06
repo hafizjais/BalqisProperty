@@ -123,7 +123,7 @@ export default async function ListingDetailPage({ params }: Props) {
           {/* Key stats grid */}
           <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
             {stats.map((s) => (
-              <div key={s.label} className="rounded-2xl bg-white p-4 shadow-card">
+              <div key={s.label} className="rounded-2xl bg-graphite p-4 shadow-card">
                 <s.icon className="h-5 w-5 text-copper" aria-hidden />
                 <p className="mt-2 text-xs text-warm-grey">{s.label}</p>
                 <p className="font-semibold text-espresso">

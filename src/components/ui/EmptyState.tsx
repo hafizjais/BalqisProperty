@@ -8,7 +8,7 @@ export default function EmptyState({
   message?: string;
 }) {
   return (
-    <div className="col-span-full rounded-2xl bg-white p-10 text-center shadow-card">
+    <div className="col-span-full rounded-2xl bg-graphite p-10 text-center shadow-card">
       <SearchX className="mx-auto h-10 w-10 text-warm-grey" aria-hidden />
       <h3 className="mt-4 font-display text-xl text-espresso">{message}</h3>
       <p className="mx-auto mt-2 max-w-md text-sm text-warm-grey">

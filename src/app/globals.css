@@ -3,12 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --espresso: #2c1f14; /* headlines */
-  --mocha: #7c6248; /* primary brand, navbar */
-  --copper: #c4784b; /* CTA buttons, badges, highlights */
-  --sand: #ede5da; /* card and section backgrounds */
-  --cream: #faf7f2; /* page background */
-  --warm-grey: #8a7968; /* secondary text */
+  --espresso: #f4f3ef; /* soft white — headings & text */
+  --mocha: #2e3138; /* brushed steel — navbar, dark surfaces */
+  --copper: #d4af37; /* gold — CTAs, badges, highlights */
+  --sand: #26272d; /* elevated surface / alternate sections */
+  --cream: #1b1c20; /* charcoal — page background */
+  --warm-grey: #a7abb3; /* steel grey — secondary text */
+  --graphite: #222329; /* card surfaces */
+  --ink: #121316; /* deepest panels */
 }
 
 html {
@@ -17,6 +19,11 @@ html {
 
 body {
   @apply bg-cream font-sans text-espresso antialiased;
+}
+
+::selection {
+  background: var(--copper);
+  color: var(--ink);
 }
 
 a,

@@ -19,7 +19,7 @@ export default function Gallery({
   if (images.length === 0) {
     return (
       <div
-        className="h-64 w-full rounded-2xl bg-gradient-to-br from-sand via-[#e0d2c0] to-mocha/40 sm:h-96"
+        className="h-64 w-full rounded-2xl bg-gradient-to-br from-mocha via-graphite to-ink sm:h-96"
         aria-hidden
       />
     );
@@ -40,7 +40,7 @@ export default function Gallery({
   };
 
   const navBtn =
-    "absolute top-1/2 z-10 -translate-y-1/2 rounded-full bg-espresso/60 p-2 text-white transition-colors hover:bg-espresso";
+    "absolute top-1/2 z-10 -translate-y-1/2 rounded-full bg-ink/70 p-2 text-white transition-colors hover:bg-ink";
 
   return (
     <div>
@@ -71,7 +71,7 @@ export default function Gallery({
           type="button"
           onClick={() => setLightbox(true)}
           aria-label="Open fullscreen gallery"
-          className="absolute bottom-3 right-3 z-10 flex items-center gap-1.5 rounded-full bg-espresso/60 px-3 py-1.5 text-xs text-white hover:bg-espresso"
+          className="absolute bottom-3 right-3 z-10 flex items-center gap-1.5 rounded-full bg-ink/70 px-3 py-1.5 text-xs text-white hover:bg-ink"
         >
           <Expand className="h-3.5 w-3.5" aria-hidden />
           {index + 1}/{images.length}

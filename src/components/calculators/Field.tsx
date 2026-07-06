@@ -35,7 +35,7 @@ export function SliderField({
           aria-label={`${label} slider`}
           className="h-2 flex-1 cursor-pointer appearance-none rounded-full bg-sand accent-copper"
         />
-        <span className="flex shrink-0 items-center rounded-lg border border-sand bg-white transition-colors focus-within:border-copper">
+        <span className="flex shrink-0 items-center rounded-lg border border-sand bg-graphite transition-colors focus-within:border-copper">
           {prefix && (
             <span className="pl-2.5 text-xs font-medium text-warm-grey">
               {prefix}
@@ -66,8 +66,8 @@ export function SliderField({
 // Big centred output for each calculator's headline number
 export function ResultHero({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl bg-espresso px-4 py-4 text-center">
-      <p className="text-xs uppercase tracking-wider text-sand/80">{label}</p>
+    <div className="rounded-xl bg-ink px-4 py-4 text-center">
+      <p className="text-xs uppercase tracking-wider text-warm-grey">{label}</p>
       <p className="mt-1 font-display text-3xl font-bold text-copper">{value}</p>
     </div>
   );

@@ -1,6 +1,6 @@
 const styles: Record<string, string> = {
   sale: "bg-mocha text-white",
-  rent: "bg-copper text-white",
+  rent: "bg-copper text-ink",
   "room-rent": "bg-warm-grey text-white",
   sold: "bg-slate-500 text-white",
   neutral: "bg-sand text-espresso",

@@ -1,7 +1,7 @@
 // Animated pulsing placeholder matching PropertyCard dimensions
 export default function SkeletonCard() {
   return (
-    <div className="overflow-hidden rounded-2xl bg-white shadow-card">
+    <div className="overflow-hidden rounded-2xl bg-graphite shadow-card">
       <div className="h-52 w-full animate-pulse bg-sand" />
       <div className="space-y-3 p-4">
         <div className="h-5 w-1/3 animate-pulse rounded bg-sand" />

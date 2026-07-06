@@ -39,7 +39,7 @@ export default function ContactClient() {
       <div className="mt-8 grid items-start gap-8 lg:grid-cols-2">
         {/* Left column — contact info */}
         <div className="space-y-6">
-          <div className="rounded-2xl bg-white p-6 shadow-card">
+          <div className="rounded-2xl bg-graphite p-6 shadow-card">
             <ul className="space-y-4 text-sm">
               <li>
                 <a
@@ -97,7 +97,7 @@ export default function ContactClient() {
               {JB_AREAS.map((area) => (
                 <span
                   key={area}
-                  className="rounded-full bg-white px-3 py-1 text-xs text-espresso"
+                  className="rounded-full bg-graphite px-3 py-1 text-xs text-espresso"
                 >
                   {area}
                 </span>
@@ -109,7 +109,7 @@ export default function ContactClient() {
         {/* Right column — WhatsApp form */}
         <form
           onSubmit={onSubmit}
-          className="rounded-2xl bg-white p-6 shadow-card"
+          className="rounded-2xl bg-graphite p-6 shadow-card"
         >
           <h2 className="font-display text-xl font-bold text-espresso">
             Send a WhatsApp inquiry

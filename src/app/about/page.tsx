@@ -53,7 +53,7 @@ export default function AboutPage() {
             the greater Iskandar Malaysia region.&rdquo;
           </p>
 
-          <div className="mt-8 flex divide-x divide-sand rounded-2xl bg-white py-4 shadow-card">
+          <div className="mt-8 flex divide-x divide-sand rounded-2xl bg-graphite py-4 shadow-card">
             {stats.map((s) => (
               <div key={s.label} className="flex-1 px-4 text-center">
                 <p className="font-display text-2xl font-bold text-copper">
@@ -103,7 +103,7 @@ export default function AboutPage() {
           {JB_AREAS.map((area) => (
             <span
               key={area}
-              className="rounded-full bg-white px-4 py-1.5 text-sm text-espresso shadow-card"
+              className="rounded-full bg-graphite px-4 py-1.5 text-sm text-espresso shadow-card"
             >
               {area}
             </span>

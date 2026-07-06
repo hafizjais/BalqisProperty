@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 const variants = {
-  primary: "bg-copper text-white hover:bg-[#a9633c]",
-  secondary: "border-2 border-mocha text-mocha hover:bg-mocha hover:text-white",
+  primary: "bg-copper text-ink hover:bg-[#b8962e]",
+  secondary: "border-2 border-warm-grey/40 text-espresso hover:border-copper hover:text-copper",
   whatsapp: "bg-[#25D366] text-white hover:bg-[#1eb857]",
-  light: "bg-white text-copper hover:bg-cream",
+  light: "bg-espresso text-ink hover:bg-white",
 } as const;
 
 type Variant = keyof typeof variants;

@@ -27,7 +27,7 @@ export default function PropertyCard({ listing }: { listing: Listing }) {
 
   return (
     <article
-      className={`group relative overflow-hidden rounded-2xl bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
+      className={`group relative overflow-hidden rounded-2xl bg-graphite shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
         available ? "" : "opacity-80 grayscale"
       }`}
     >
@@ -49,7 +49,7 @@ export default function PropertyCard({ listing }: { listing: Listing }) {
           />
         ) : (
           <div
-            className="h-full w-full bg-gradient-to-br from-sand via-[#e0d2c0] to-mocha/40"
+            className="h-full w-full bg-gradient-to-br from-mocha via-graphite to-ink"
             aria-hidden
           />
         )}

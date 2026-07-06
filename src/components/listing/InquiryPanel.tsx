@@ -33,7 +33,7 @@ export default function InquiryPanel({ listing }: { listing: Listing }) {
   return (
     <>
       {/* Desktop sticky sidebar card */}
-      <div className="hidden rounded-2xl bg-white p-6 shadow-card lg:block">
+      <div className="hidden rounded-2xl bg-graphite p-6 shadow-card lg:block">
         <p className="text-sm text-warm-grey">Price</p>
         <p className="font-display text-3xl font-bold text-copper">
           {priceLabel(listing)}
@@ -72,7 +72,7 @@ export default function InquiryPanel({ listing }: { listing: Listing }) {
       </div>
 
       {/* Mobile sticky bottom bar — right padding keeps the WhatsApp FAB clear */}
-      <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-3 border-t border-sand bg-white px-4 py-3 pr-24 shadow-[0_-4px_24px_rgba(44,31,20,0.12)] lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-3 border-t border-sand bg-graphite px-4 py-3 pr-24 shadow-[0_-4px_24px_rgba(0,0,0,0.55)] lg:hidden">
         <p className="font-display text-lg font-bold text-copper">
           {priceLabel(listing)}
         </p>
