@@ -11,7 +11,7 @@ export default function FeaturedListings() {
   const featured = listings.filter((l) => l.featured).slice(0, 6);
 
   return (
-    <section className="bg-sand py-16">
+    <section className="bg-gradient-to-b from-cream via-sand to-cream py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <h2 className="text-center font-display text-3xl font-bold text-espresso">
           Featured Listings

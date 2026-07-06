@@ -21,7 +21,7 @@ export default function CalculatorTabs() {
   const [sharedLoan, setSharedLoan] = useState(450000);
 
   return (
-    <div className="rounded-2xl bg-graphite p-5 shadow-card">
+    <div className="rounded-2xl border border-white/10 bg-graphite p-5 shadow-card">
       <h2 className="font-display text-xl font-bold text-espresso">
         Property Calculators
       </h2>

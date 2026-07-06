@@ -3,9 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { MessageCircle, ArrowRight } from "lucide-react";
+import { MessageCircle, ArrowRight, Send } from "lucide-react";
 import Button from "@/components/ui/Button";
-import { waLink } from "@/lib/constants";
+import { waLink, TELEGRAM_URL } from "@/lib/constants";
 
 const stats = [
   { value: "200+", label: "Transactions" },
@@ -46,14 +46,14 @@ export default function HeroSection() {
       {/* Charcoal gradient for text legibility */}
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-ink/10" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl items-end gap-12 px-4 pb-36 pt-40 sm:px-6">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center gap-12 px-4 pb-32 pt-20 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="max-w-3xl flex-1"
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-copper">
+          <p className="text-sm font-bold uppercase tracking-[0.3em] text-copper sm:text-base">
             BalqisMJ Property · Johor Bahru
           </p>
           <h1 className="mt-4 font-display text-4xl font-bold leading-tight text-espresso sm:text-6xl">
@@ -64,17 +64,22 @@ export default function HeroSection() {
             Iskandar Malaysia region
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button variant="primary" href="/buy">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <Button variant="primary" size="lg" href="/buy">
               Browse All Listings
-              <ArrowRight className="h-4 w-4" aria-hidden />
+              <ArrowRight className="h-5 w-5" aria-hidden />
             </Button>
             <Button
               variant="whatsapp"
+              size="lg"
               href={waLink("Hi Balqis, I'm looking for property in JB. Can you help?")}
             >
-              <MessageCircle className="h-4 w-4" aria-hidden />
+              <MessageCircle className="h-5 w-5" aria-hidden />
               WhatsApp Me
+            </Button>
+            <Button variant="telegram" size="lg" href={TELEGRAM_URL}>
+              <Send className="h-5 w-5" aria-hidden />
+              Telegram
             </Button>
           </div>
 

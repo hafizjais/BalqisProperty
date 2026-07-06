@@ -1,6 +1,7 @@
 export const WHATSAPP_NUMBER = "60182656367";
 export const INSTAGRAM_HANDLE = "balqismjproperty";
 export const INSTAGRAM_URL = `https://instagram.com/${INSTAGRAM_HANDLE}`;
+export const TELEGRAM_URL = "https://t.me/balqismjrental";
 export const AGENT_NAME = "Nurul Balqis";
 export const BRAND_NAME = "BalqisMJ Property";
 export const SITE_URL = "https://balqismjproperty.vercel.app";

@@ -18,7 +18,7 @@ export interface FilterConfig {
 }
 
 const selectCls =
-  "w-full rounded-lg border border-sand bg-graphite px-3 py-2 text-sm text-espresso";
+  "w-full rounded-lg border border-white/10 bg-graphite px-3 py-2 text-sm text-espresso";
 
 export default function FilterBar({
   filters,
@@ -66,7 +66,7 @@ export default function FilterBar({
     });
 
   return (
-    <div className="sticky top-16 z-30 -mx-4 border-b border-sand bg-cream/95 px-4 py-4 backdrop-blur sm:-mx-6 sm:px-6">
+    <div className="sticky top-16 z-30 -mx-4 border-b border-white/10 bg-cream/95 px-4 py-4 backdrop-blur sm:-mx-6 sm:px-6">
       <div className="mx-auto grid max-w-7xl grid-cols-2 items-end gap-3 md:grid-cols-3 lg:grid-cols-6">
         {/* Area multi-select */}
         <div ref={areasRef} className="relative col-span-2 md:col-span-1">
@@ -87,7 +87,7 @@ export default function FilterBar({
             <ChevronDown className="h-4 w-4 shrink-0 text-warm-grey" aria-hidden />
           </button>
           {areasOpen && (
-            <div className="absolute z-40 mt-1 max-h-64 w-64 overflow-auto rounded-xl border border-sand bg-graphite p-2 shadow-card-hover">
+            <div className="absolute z-40 mt-1 max-h-64 w-64 overflow-auto rounded-xl border border-white/10 bg-graphite p-2 shadow-card-hover">
               {JB_AREAS.map((area) => (
                 <label
                   key={area}
@@ -132,7 +132,7 @@ export default function FilterBar({
           <label className="mb-1 block text-xs font-semibold text-warm-grey">
             Price: {formatRM(filters.priceMin)} – {formatRM(filters.priceMax)}
           </label>
-          <div className="space-y-1 rounded-lg border border-sand bg-graphite px-3 py-1.5">
+          <div className="space-y-1 rounded-lg border border-white/10 bg-graphite px-3 py-1.5">
             <input
               type="range"
               min={config.priceMin}
@@ -267,7 +267,7 @@ export default function FilterBar({
             onClick={reset}
             aria-label="Reset filters"
             title="Reset filters"
-            className="rounded-lg border border-sand bg-graphite p-2.5 text-warm-grey hover:text-copper"
+            className="rounded-lg border border-white/10 bg-graphite p-2.5 text-warm-grey hover:text-copper"
           >
             <RotateCcw className="h-4 w-4" aria-hidden />
           </button>

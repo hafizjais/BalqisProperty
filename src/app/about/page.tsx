@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 const propertyTypes = ["Residential", "Commercial", "Land", "Room Rental"];
 
 const stats = [
-  { value: "200+", label: "Transactions" },
-  { value: "8+", label: "Years Experience" },
+  { value: "8", label: "Transactions" },
+  { value: "3", label: "Months Experience" },
   { value: `${JB_AREAS.length}`, label: "Areas Covered" },
 ];
 
@@ -53,7 +53,7 @@ export default function AboutPage() {
             the greater Iskandar Malaysia region.&rdquo;
           </p>
 
-          <div className="mt-8 flex divide-x divide-sand rounded-2xl bg-graphite py-4 shadow-card">
+          <div className="mt-8 flex divide-x divide-white/10 rounded-2xl border border-white/10 bg-graphite py-4 shadow-card">
             {stats.map((s) => (
               <div key={s.label} className="flex-1 px-4 text-center">
                 <p className="font-display text-2xl font-bold text-copper">

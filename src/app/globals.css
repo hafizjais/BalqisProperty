@@ -4,13 +4,13 @@
 
 :root {
   --espresso: #f4f3ef; /* soft white — headings & text */
-  --mocha: #2e3138; /* brushed steel — navbar, dark surfaces */
+  --mocha: #343841; /* brushed steel — navbar, lightest surfaces */
   --copper: #d4af37; /* gold — CTAs, badges, highlights */
-  --sand: #26272d; /* elevated surface / alternate sections */
-  --cream: #1b1c20; /* charcoal — page background */
-  --warm-grey: #a7abb3; /* steel grey — secondary text */
-  --graphite: #222329; /* card surfaces */
-  --ink: #121316; /* deepest panels */
+  --sand: #262830; /* elevated section backgrounds, tracks, chips */
+  --cream: #17181c; /* charcoal — page background */
+  --warm-grey: #acb0b8; /* steel grey — secondary text */
+  --graphite: #2b2d35; /* card surfaces */
+  --ink: #101114; /* deepest panels */
 }
 
 html {

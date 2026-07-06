@@ -10,14 +10,15 @@ const config: Config = {
     extend: {
       colors: {
         // Dark luxe theme: charcoal bg, soft white text, gold + steel accents
+        // Layering scale (dark → light): ink → cream (page) → sand → graphite → mocha
         espresso: "#F4F3EF", // soft white — headings & body text
-        mocha: "#2E3138", // brushed steel — navbar, dark surfaces
+        mocha: "#343841", // brushed steel — navbar, lightest surfaces
         copper: "#D4AF37", // gold — CTAs, badges, highlights
-        sand: "#26272D", // elevated surface / alternate sections
-        cream: "#1B1C20", // charcoal — page background
-        "warm-grey": "#A7ABB3", // steel grey — secondary text
-        graphite: "#222329", // card surfaces
-        ink: "#121316", // deepest panels, text on gold
+        sand: "#262830", // elevated section backgrounds, tracks, chips
+        cream: "#17181C", // charcoal — page background
+        "warm-grey": "#ACB0B8", // steel grey — secondary text
+        graphite: "#2B2D35", // card surfaces — clearly lighter than the page
+        ink: "#101114", // deepest panels, text on gold
       },
       fontFamily: {
         display: ["var(--font-playfair)", "Georgia", "serif"],

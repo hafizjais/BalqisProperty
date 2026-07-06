@@ -11,7 +11,7 @@ import {
 } from "@/lib/constants";
 
 const inputCls =
-  "w-full rounded-lg border border-sand bg-cream px-3 py-2.5 text-sm text-espresso placeholder:text-warm-grey/70";
+  "w-full rounded-lg border border-white/10 bg-cream px-3 py-2.5 text-sm text-espresso placeholder:text-warm-grey/70";
 
 export default function ContactClient() {
   const [name, setName] = useState("");
@@ -39,7 +39,7 @@ export default function ContactClient() {
       <div className="mt-8 grid items-start gap-8 lg:grid-cols-2">
         {/* Left column — contact info */}
         <div className="space-y-6">
-          <div className="rounded-2xl bg-graphite p-6 shadow-card">
+          <div className="rounded-2xl border border-white/10 bg-graphite p-6 shadow-card">
             <ul className="space-y-4 text-sm">
               <li>
                 <a
@@ -109,7 +109,7 @@ export default function ContactClient() {
         {/* Right column — WhatsApp form */}
         <form
           onSubmit={onSubmit}
-          className="rounded-2xl bg-graphite p-6 shadow-card"
+          className="rounded-2xl border border-white/10 bg-graphite p-6 shadow-card"
         >
           <h2 className="font-display text-xl font-bold text-espresso">
             Send a WhatsApp inquiry
