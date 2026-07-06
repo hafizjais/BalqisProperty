@@ -5,7 +5,7 @@ import { readdirSync, statSync, writeFileSync, existsSync } from "fs";
 import path from "path";
 
 const photosDir = path.join(process.cwd(), "public", "photos");
-const outFile = path.join(process.cwd(), "lib", "photo-manifest.json");
+const outFile = path.join(process.cwd(), "src", "lib", "photo-manifest.json");
 
 const manifest = {};
 
@@ -34,5 +34,5 @@ writeFileSync(outFile, JSON.stringify(manifest, null, 2));
 
 const total = Object.values(manifest).reduce((n, a) => n + a.length, 0);
 console.log(
-  `photo-manifest: ${Object.keys(manifest).length} folders, ${total} images → lib/photo-manifest.json`
+  `photo-manifest: ${Object.keys(manifest).length} folders, ${total} images → src/lib/photo-manifest.json`
 );

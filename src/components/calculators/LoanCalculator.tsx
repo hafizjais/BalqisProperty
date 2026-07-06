@@ -37,7 +37,7 @@ export default function LoanCalculator({
 
   return (
     <div className="space-y-4">
-      <SliderField label="Property Price" prefix="RM" value={price} min={50000} max={3000000} step={10000} onChange={setPrice} />
+      <SliderField label="Property Price" prefix="RM" value={price} min={100000} max={1500000} step={10000} onChange={setPrice} />
       <SliderField label="Down Payment (min 10%)" suffix="%" value={down} min={10} max={50} step={1} onChange={setDown} />
       <SliderField label="Loan Tenure" suffix="yrs" value={tenure} min={5} max={35} step={1} onChange={setTenure} />
       <SliderField label="Interest Rate" suffix="%" value={rate} min={2} max={8} step={0.05} onChange={setRate} />

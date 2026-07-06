@@ -12,7 +12,7 @@ import path from "path";
 
 const ROOT = process.cwd();
 const manifest = JSON.parse(
-  readFileSync(path.join(ROOT, "lib", "photo-manifest.json"), "utf8")
+  readFileSync(path.join(ROOT, "src", "lib", "photo-manifest.json"), "utf8")
 );
 
 const MAX_IMAGES = 20;
