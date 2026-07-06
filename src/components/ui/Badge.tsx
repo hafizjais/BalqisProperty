@@ -1,5 +1,5 @@
 const styles: Record<string, string> = {
-  sale: "bg-mocha text-white",
+  sale: "bg-truffle text-white",
   rent: "bg-copper text-ink",
   "room-rent": "bg-warm-grey text-white",
   sold: "bg-slate-500 text-white",

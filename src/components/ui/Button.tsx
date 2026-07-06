@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const variants = {
-  primary: "bg-copper text-ink hover:bg-[#b8962e]",
+  primary: "bg-copper text-ink hover:bg-[#ef9a45]",
   secondary: "border-2 border-warm-grey/40 text-espresso hover:border-copper hover:text-copper",
   whatsapp: "bg-[#25D366] text-white hover:bg-[#1eb857]",
   telegram: "bg-[#229ED9] text-white hover:bg-[#1c86b8]",

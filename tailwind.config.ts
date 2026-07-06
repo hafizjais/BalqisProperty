@@ -9,16 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Dark luxe theme: charcoal bg, soft white text, gold + steel accents
+        // MP072 palette: deep navy bg, palladian text, burning-flame accents
         // Layering scale (dark → light): ink → cream (page) → sand → graphite → mocha
-        espresso: "#F4F3EF", // soft white — headings & body text
-        mocha: "#343841", // brushed steel — navbar, lightest surfaces
-        copper: "#D4AF37", // gold — CTAs, badges, highlights
-        sand: "#262830", // elevated section backgrounds, tracks, chips
-        cream: "#17181C", // charcoal — page background
-        "warm-grey": "#ACB0B8", // steel grey — secondary text
-        graphite: "#2B2D35", // card surfaces — clearly lighter than the page
-        ink: "#101114", // deepest panels, text on gold
+        espresso: "#EEE9DF", // Palladian — headings & body text
+        mocha: "#3A4C63", // lightened Blue Fantastic — navbar, lightest surfaces
+        copper: "#FFB162", // Burning Flame — CTAs, badges, highlights
+        sand: "#223140", // elevated section backgrounds, tracks, chips
+        cream: "#1B2632", // Abyssal Anchorfish Blue — page background
+        "warm-grey": "#C9C1B1", // Oatmeal — secondary text
+        graphite: "#2C3B4D", // Blue Fantastic — card surfaces
+        ink: "#131B25", // deepest panels, text on flame
+        truffle: "#A35139", // Truffle Trouble — warm secondary accent
       },
       fontFamily: {
         display: ["var(--font-playfair)", "Georgia", "serif"],
