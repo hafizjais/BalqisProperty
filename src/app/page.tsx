@@ -50,7 +50,7 @@ export default function HomePage() {
             {whyJB.map((item) => (
               <div
                 key={item.title}
-                className="rounded-2xl border border-white/10 bg-graphite p-6 text-center shadow-card transition-colors hover:border-copper/40"
+                className="rounded-2xl border border-peach bg-graphite p-6 text-center shadow-card transition-colors hover:border-copper/40"
               >
                 <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-ink text-copper">
                   <item.icon className="h-6 w-6" aria-hidden />
@@ -74,12 +74,12 @@ export default function HomePage() {
             <p className="font-display text-2xl font-bold text-copper">
               Not sure where to start? Let&apos;s chat.
             </p>
-            <p className="mt-1 text-sm text-warm-grey">
+            <p className="mt-1 text-sm text-cream/80">
               Tell Balqis what you need — she&apos;ll do the searching for you.
             </p>
           </div>
           <Button
-            variant="primary"
+            variant="light"
             href={waLink("Hi Balqis, I'm not sure where to start. Can you guide me?")}
           >
             <MessageCircle className="h-4 w-4" aria-hidden />

@@ -56,10 +56,10 @@ export default function HeroSection() {
           <p className="text-sm font-bold uppercase tracking-[0.3em] text-copper sm:text-base">
             BalqisMJ Property · Johor Bahru
           </p>
-          <h1 className="mt-4 font-display text-4xl font-bold leading-tight text-espresso sm:text-6xl">
+          <h1 className="mt-4 font-display text-4xl font-bold leading-tight text-cream sm:text-6xl">
             Your Trusted Property Partner in Johor Bahru
           </h1>
-          <p className="mt-4 max-w-xl text-lg text-warm-grey">
+          <p className="mt-4 max-w-xl text-lg text-cream/85">
             Nurul Balqis · Buy, Sell &amp; Rent across JB and the greater
             Iskandar Malaysia region
           </p>
@@ -90,7 +90,7 @@ export default function HeroSection() {
                 <p className="font-display text-xl font-bold text-copper">
                   {s.value}
                 </p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-warm-grey">
+                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-cream/75">
                   {s.label}
                 </p>
               </div>
@@ -133,7 +133,7 @@ export default function HeroSection() {
               />
             </div>
             {/* name badge */}
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-copper/40 bg-ink/85 px-5 py-2 text-sm font-semibold text-espresso backdrop-blur-md">
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-copper/40 bg-ink/85 px-5 py-2 text-sm font-semibold text-cream backdrop-blur-md">
               Nurul Balqis <span className="text-copper">· BalqisMJ</span>
             </div>
           </motion.div>

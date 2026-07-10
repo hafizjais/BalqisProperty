@@ -19,7 +19,7 @@ export default function Gallery({
   if (images.length === 0) {
     return (
       <div
-        className="h-64 w-full rounded-2xl bg-gradient-to-br from-mocha via-graphite to-ink sm:h-96"
+        className="h-64 w-full rounded-2xl bg-gradient-to-br from-sand via-peach to-copper/50 sm:h-96"
         aria-hidden
       />
     );

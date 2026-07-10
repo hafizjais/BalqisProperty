@@ -21,7 +21,7 @@ export default function CalculatorTabs() {
   const [sharedLoan, setSharedLoan] = useState(450000);
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-graphite p-5 shadow-card">
+    <div className="rounded-2xl border border-peach bg-graphite p-5 shadow-card">
       <h2 className="font-display text-xl font-bold text-espresso">
         Property Calculators
       </h2>
@@ -43,7 +43,7 @@ export default function CalculatorTabs() {
             className={`flex flex-col items-center gap-1 rounded-lg px-1 py-2 text-[11px] font-semibold leading-tight transition-all ${
               active === i
                 ? "bg-copper text-ink shadow-sm"
-                : "text-espresso/70 hover:bg-white/10 hover:text-espresso"
+                : "text-espresso/70 hover:bg-white/70 hover:text-espresso"
             }`}
           >
             <tab.icon className="h-4 w-4" aria-hidden />

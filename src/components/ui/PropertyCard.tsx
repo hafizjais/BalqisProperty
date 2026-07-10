@@ -27,7 +27,7 @@ export default function PropertyCard({ listing }: { listing: Listing }) {
 
   return (
     <article
-      className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-graphite shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
+      className={`group relative overflow-hidden rounded-2xl border border-peach bg-graphite shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
         available ? "" : "opacity-80 grayscale"
       }`}
     >
@@ -49,7 +49,7 @@ export default function PropertyCard({ listing }: { listing: Listing }) {
           />
         ) : (
           <div
-            className="h-full w-full bg-gradient-to-br from-mocha via-graphite to-ink"
+            className="h-full w-full bg-gradient-to-br from-sand via-peach to-copper/50"
             aria-hidden
           />
         )}
@@ -74,7 +74,7 @@ export default function PropertyCard({ listing }: { listing: Listing }) {
           {listing.subType ? ` · ${listing.subType}` : ""}
         </p>
 
-        <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-3">
+        <div className="mt-3 flex items-center justify-between border-t border-peach pt-3">
           {isRoom ? (
             <div className="flex flex-wrap gap-1.5">
               {listing.furnishing && (

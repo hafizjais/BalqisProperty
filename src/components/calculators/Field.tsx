@@ -35,7 +35,7 @@ export function SliderField({
           aria-label={`${label} slider`}
           className="h-2 flex-1 cursor-pointer appearance-none rounded-full bg-sand accent-copper"
         />
-        <span className="flex shrink-0 items-center rounded-lg border border-white/10 bg-graphite transition-colors focus-within:border-copper">
+        <span className="flex shrink-0 items-center rounded-lg border border-peach bg-graphite transition-colors focus-within:border-copper">
           {prefix && (
             <span className="pl-2.5 text-xs font-medium text-warm-grey">
               {prefix}
@@ -67,7 +67,7 @@ export function SliderField({
 export function ResultHero({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-xl bg-ink px-4 py-4 text-center">
-      <p className="text-xs uppercase tracking-wider text-warm-grey">{label}</p>
+      <p className="text-xs uppercase tracking-wider text-cream/75">{label}</p>
       <p className="mt-1 font-display text-3xl font-bold text-copper">{value}</p>
     </div>
   );
@@ -81,7 +81,7 @@ export function ResultRow({
   value: string;
 }) {
   return (
-    <div className="flex items-center justify-between border-b border-white/10 py-2 last:border-0">
+    <div className="flex items-center justify-between border-b border-peach py-2 last:border-0">
       <span className="text-sm text-warm-grey">{label}</span>
       <span className="text-sm font-semibold text-espresso">{value}</span>
     </div>

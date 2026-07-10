@@ -78,10 +78,10 @@ export default function CategoryCards() {
                   <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-ink/70 text-copper backdrop-blur-sm">
                     <cat.icon className="h-5 w-5" aria-hidden />
                   </span>
-                  <h3 className="mt-3 text-lg font-semibold text-espresso">
+                  <h3 className="mt-3 text-lg font-semibold text-cream">
                     {cat.title}
                   </h3>
-                  <p className="mt-0.5 text-sm text-warm-grey">{cat.tagline}</p>
+                  <p className="mt-0.5 text-sm text-cream/80">{cat.tagline}</p>
                   <span className="mt-3 flex items-center gap-1 text-sm font-semibold text-copper">
                     Explore
                     <ArrowRight

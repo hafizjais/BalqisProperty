@@ -21,7 +21,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-40 bg-mocha text-espresso shadow-md">
+    <header className="sticky top-0 z-40 bg-mocha text-white shadow-md">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="font-display text-xl font-bold tracking-wide">
           BalqisMJ <span className="text-copper">Property</span>
@@ -35,7 +35,7 @@ export default function Navbar() {
                 className={`border-b-2 pb-1 text-sm transition-colors hover:text-white ${
                   pathname === link.href
                     ? "border-copper font-semibold text-white"
-                    : "border-transparent text-espresso/80"
+                    : "border-transparent text-white/85"
                 }`}
               >
                 {link.label}
@@ -49,7 +49,7 @@ export default function Navbar() {
             href={waLink("Hi Balqis, boleh saya dapatkan bantuan?")}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden items-center gap-2 rounded-full bg-copper px-4 py-2 text-sm font-semibold text-ink transition-colors hover:bg-[#a9633c] sm:inline-flex"
+            className="hidden items-center gap-2 rounded-full bg-copper px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#a9633c] sm:inline-flex"
           >
             <MessageCircle className="h-4 w-4" aria-hidden />
             WhatsApp
@@ -77,7 +77,7 @@ export default function Navbar() {
                   className={`block rounded-lg px-3 py-2 text-sm ${
                     pathname === link.href
                       ? "bg-white/10 font-semibold text-white"
-                      : "text-espresso/80 hover:bg-white/5"
+                      : "text-white/85 hover:bg-white/5"
                   }`}
                 >
                   {link.label}
@@ -89,7 +89,7 @@ export default function Navbar() {
                 href={waLink("Hi Balqis, boleh saya dapatkan bantuan?")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 rounded-full bg-copper px-4 py-2.5 text-sm font-semibold text-ink"
+                className="flex items-center justify-center gap-2 rounded-full bg-copper px-4 py-2.5 text-sm font-semibold text-white"
               >
                 <MessageCircle className="h-4 w-4" aria-hidden />
                 WhatsApp Balqis

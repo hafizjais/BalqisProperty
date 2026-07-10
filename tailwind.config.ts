@@ -9,25 +9,26 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // MP072 palette: deep navy bg, palladian text, burning-flame accents
-        // Layering scale (dark → light): ink → cream (page) → sand → graphite → mocha
-        espresso: "#EEE9DF", // Palladian — headings & body text
-        mocha: "#3A4C63", // lightened Blue Fantastic — navbar, lightest surfaces
-        copper: "#FFB162", // Burning Flame — CTAs, badges, highlights
-        sand: "#223140", // elevated section backgrounds, tracks, chips
-        cream: "#1B2632", // Abyssal Anchorfish Blue — page background
-        "warm-grey": "#C9C1B1", // Oatmeal — secondary text
-        graphite: "#2C3B4D", // Blue Fantastic — card surfaces
-        ink: "#131B25", // deepest panels, text on flame
-        truffle: "#A35139", // Truffle Trouble — warm secondary accent
+        // Warm sunset light theme: cream bg, teal + orange accents, brown text
+        espresso: "#3E2922", // deep earth brown — headings & body text
+        mocha: "#01757A", // teal — navbar, brand surfaces
+        teal: "#01757A", // teal — primary buttons, active states
+        copper: "#E57734", // orange — CTAs, prices, badges, highlights
+        sand: "#F3DCC0", // soft cream-peach — chips, tracks, alt sections
+        cream: "#F8EBCF", // cream — page & section backgrounds
+        "warm-grey": "#7D6F65", // darkened taupe — secondary text (readable)
+        taupe: "#B6ACAD", // muted taupe — borders, placeholders
+        peach: "#F6C0A6", // soft peach — card borders, hover accents
+        graphite: "#FFFCF5", // warm white — card surfaces
+        ink: "#3E2922", // deep brown — footer, dark panels, photo overlays
       },
       fontFamily: {
         display: ["var(--font-playfair)", "Georgia", "serif"],
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        card: "0 6px 28px rgba(0, 0, 0, 0.45)",
-        "card-hover": "0 14px 40px rgba(0, 0, 0, 0.6)",
+        card: "0 4px 20px rgba(62, 41, 34, 0.1)",
+        "card-hover": "0 12px 32px rgba(62, 41, 34, 0.18)",
       },
     },
   },

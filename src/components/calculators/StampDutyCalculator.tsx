@@ -26,7 +26,7 @@ export default function StampDutyCalculator() {
     <div className="space-y-4">
       <SliderField label="Property Price" prefix="RM" value={price} min={100000} max={1500000} step={10000} onChange={setPrice} />
 
-      <label className="flex cursor-pointer items-center justify-between rounded-xl border border-white/10 bg-graphite px-4 py-3">
+      <label className="flex cursor-pointer items-center justify-between rounded-xl border border-peach bg-graphite px-4 py-3">
         <span className="text-sm font-medium text-espresso">
           I&apos;m a first-time buyer
         </span>
