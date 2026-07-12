@@ -8,10 +8,10 @@ import { JB_AREAS, INSTAGRAM_URL, waLink } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "About Nurul Balqis",
   description:
-    "Meet Nurul Balqis of BalqisMJ Property — licensed real estate agent specialising in Johor Bahru and the greater Iskandar Malaysia region.",
+    "Meet Nurul Balqis of BalqisMJ Property — property agent specializing in Johor Bahru and the greater Iskandar Malaysia region.",
 };
 
-const propertyTypes = ["Residential", "Commercial", "Land", "Room Rental"];
+const propertyTypes = ["Residential", "Commercial", "Land"];
 
 const stats = [
   { value: "8", label: "Transactions" },
@@ -29,7 +29,7 @@ export default function AboutPage() {
         <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl shadow-card">
           <Image
             src="/agent-balqis.png"
-            alt="Nurul Balqis, licensed real estate agent in Johor Bahru"
+            alt="Nurul Balqis, property agent specializing in Johor Bahru and the greater Iskandar Malaysia region."
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 50vw"
@@ -47,10 +47,10 @@ export default function AboutPage() {
           </p>
 
           <p className="mt-6 text-lg leading-relaxed text-espresso/90">
-            &ldquo;With years of experience in the Johor Bahru property market,
-            I specialise in helping clients find the right home — whether
-            buying, selling, or renting. My focus is always on Johor Bahru and
-            the greater Iskandar Malaysia region.&rdquo;
+            &ldquo;With 3 months of experience in the Johor Bahru property
+            market, I specialise in helping clients find the right home
+            whether buying, selling, or renting. My focus is always on Johor
+            Bahru and the greater Iskandar Malaysia region.&rdquo;
           </p>
 
           <div className="mt-8 flex divide-x divide-peach rounded-2xl border border-peach bg-graphite py-4 shadow-card">
