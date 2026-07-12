@@ -3,13 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import {
-  Home,
-  KeyRound,
-  DoorOpen,
-  Building2,
-  ArrowRight,
-} from "lucide-react";
+import { Home, Store, LandPlot, ArrowRight } from "lucide-react";
 import manifestJson from "@/lib/photo-manifest.json";
 
 const manifest: Record<string, string[]> = manifestJson;
@@ -19,38 +13,31 @@ const categories = [
     href: "/buy",
     icon: Home,
     title: "Buy Property",
-    tagline: "Find your dream home in JB",
+    tagline: "Find your dream home in Johor",
     photo: manifest["prop-001"]?.[0],
   },
   {
-    href: "/rent-house",
-    icon: KeyRound,
-    title: "Rent a House",
-    tagline: "Monthly rentals across JB areas",
-    photo: manifest["prop-002"]?.[0],
-  },
-  {
-    href: "/rent-room",
-    icon: DoorOpen,
-    title: "Rent a Room",
-    tagline: "Budget-friendly room rentals",
-    photo: manifest["prop-003"]?.[0],
-  },
-  {
-    href: "/commercial",
-    icon: Building2,
-    title: "Commercial",
-    tagline: "Shops, offices & industrial space",
+    href: "/commercial/shop-lot",
+    icon: Store,
+    title: "Shop Lot",
+    tagline: "Shops & premises for your business",
     photo: manifest["shoplot-001"]?.[0],
+  },
+  {
+    href: "/commercial/land",
+    icon: LandPlot,
+    title: "Land",
+    tagline: "Lots & land for development",
+    photo: manifest["prop-005"]?.[0],
   },
 ];
 
-// The 4 category entry points — photo-backed cards overlapping the hero edge
+// The 3 category entry points — photo-backed cards overlapping the hero edge
 export default function CategoryCards() {
   return (
     <section className="relative z-10 -mt-24 pb-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.href}

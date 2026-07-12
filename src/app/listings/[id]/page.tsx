@@ -11,6 +11,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { fetchListing } from "@/lib/sheets";
+import { isShopLot, isLand } from "@/lib/filters";
 import { priceLabel } from "@/lib/constants";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Badge, { listingTypeLabel } from "@/components/ui/Badge";
@@ -51,16 +52,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function categoryCrumb(listing: { listingType: string; propertyType: string }) {
-  if (listing.propertyType.toLowerCase() === "commercial") {
-    return { label: "Commercial", href: "/commercial" };
+function categoryCrumb(listing: Parameters<typeof isLand>[0]) {
+  if (isLand(listing)) return { label: "Land", href: "/commercial/land" };
+  if (isShopLot(listing) || listing.propertyType.toLowerCase() === "commercial") {
+    return { label: "Shop Lot", href: "/commercial/shop-lot" };
   }
-  const map: Record<string, { label: string; href: string }> = {
-    sale: { label: "Buy Property", href: "/buy" },
-    rent: { label: "Rent a House", href: "/rent-house" },
-    "room-rent": { label: "Rent a Room", href: "/rent-room" },
-  };
-  return map[listing.listingType] || { label: "Listings", href: "/buy" };
+  return { label: "Buy Property", href: "/buy" };
 }
 
 export default async function ListingDetailPage({ params }: Props) {
@@ -73,7 +70,7 @@ export default async function ListingDetailPage({ params }: Props) {
   const stats = [
     { icon: BedDouble, label: "Bedrooms", value: listing.bedrooms },
     { icon: Bath, label: "Bathrooms", value: listing.bathrooms },
-    { icon: Car, label: "Car Park", value: listing.carPark },
+    { icon: Car, label: "Car Park", value: listing.carPark || null },
     {
       icon: Ruler,
       label: "Built-up",
@@ -81,10 +78,11 @@ export default async function ListingDetailPage({ params }: Props) {
     },
     {
       icon: LandPlot,
-      label: "Land Size",
-      value: listing.landSqft ? `${listing.landSqft.toLocaleString()} sqft` : null,
+      label: "Lot Size",
+      value: listing.landSqft || null,
     },
     { icon: ScrollText, label: "Tenure", value: listing.tenure || null },
+    { icon: ScrollText, label: "Lot Status", value: listing.lotStatus || null },
   ];
 
   return (
@@ -105,6 +103,7 @@ export default async function ListingDetailPage({ params }: Props) {
             </Badge>
             {listing.isNew && available && <Badge variant="rent">New</Badge>}
             {listing.furnishing && <Badge>{listing.furnishing}</Badge>}
+            {listing.lotStatus && <Badge>{listing.lotStatus}</Badge>}
           </div>
 
           <h1 className="mt-3 font-display text-3xl font-bold text-espresso md:text-4xl">

@@ -10,9 +10,9 @@ import {
 
 const quickLinks = [
   { href: "/buy", label: "Buy Property" },
-  { href: "/rent-house", label: "Rent a House" },
-  { href: "/rent-room", label: "Rent a Room" },
   { href: "/commercial", label: "Commercial" },
+  { href: "/commercial/shop-lot", label: "Shop Lot" },
+  { href: "/commercial/land", label: "Land" },
   { href: "/about", label: "About Balqis" },
   { href: "/contact", label: "Contact" },
 ];

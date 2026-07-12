@@ -1,5 +1,28 @@
 import type { Listing } from "./types";
 
+// ---------------------------------------------------------------------------
+// Listing categorisation — the site sells houses, shop lots and land.
+// The sheet has no propertyType column, so categories come from subType.
+// ---------------------------------------------------------------------------
+const SHOP_RE = /shop|office|soho|retail|factory|warehouse|industrial/i;
+const LAND_RE = /\bland\b|tanah/i;
+
+export function isShopLot(l: Listing): boolean {
+  return SHOP_RE.test(`${l.propertyType} ${l.subType}`);
+}
+
+export function isLand(l: Listing): boolean {
+  return LAND_RE.test(`${l.propertyType} ${l.subType}`);
+}
+
+export function isCommercial(l: Listing): boolean {
+  return (
+    isShopLot(l) ||
+    isLand(l) ||
+    l.propertyType.toLowerCase() === "commercial"
+  );
+}
+
 export interface Filters {
   areas: string[];
   propertyType: string; // "any" or a subType keyword
@@ -50,7 +73,8 @@ export function applyFilters(listings: Listing[], f: Filters): Listing[] {
     }
 
     if (f.tenure !== "any") {
-      if (!l.tenure || l.tenure.toLowerCase() !== f.tenure) return false;
+      // includes() so "Freehold, Tanah Kurnia" still matches "freehold"
+      if (!l.tenure || !l.tenure.toLowerCase().includes(f.tenure)) return false;
     }
 
     if (f.furnishing !== "any") {

@@ -60,8 +60,8 @@ export default function HeroSection() {
             Your Trusted Property Partner in Johor Bahru
           </h1>
           <p className="mt-4 max-w-xl text-lg text-cream/85">
-            Nurul Balqis · Buy, Sell &amp; Rent across JB and the greater
-            Iskandar Malaysia region
+            Nurul Balqis · Houses, shop lots &amp; land for sale across Johor
+            and the greater Iskandar Malaysia region
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">

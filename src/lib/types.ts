@@ -7,10 +7,11 @@ export interface Listing {
   price: number;
   bedrooms: number | null;
   bathrooms: number | null;
-  carPark: number | null;
+  carPark: string; // free text in the sheet, e.g. "2-3"
   builtUpSqft: number | null;
-  landSqft: number | null;
-  tenure: string;
+  landSqft: string; // lot dimensions in the sheet, e.g. "20x70"
+  tenure: string; // sheet column "status pemilikan" — Freehold / Leasehold
+  lotStatus: string; // sheet column "status lot tanah" — Bumiputera / Non Bumi / International / Malay Reserved
   furnishing: string;
   status: string; // "available" | "sold" | "rented"
   featured: boolean;

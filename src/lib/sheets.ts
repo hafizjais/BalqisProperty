@@ -93,29 +93,22 @@ const parseBool = (val: any): boolean => {
   return str === "true" || str === "1" || str === "yes" || str === "checked";
 };
 
+// The sheet stores the full <iframe …> embed snippet — extract the src URL.
+// Also accepts a bare URL for backwards compatibility.
+function extractMapSrc(val: string): string {
+  if (!val) return "";
+  const m = val.match(/src\s*=\s*"([^"]+)"/) || val.match(/src\s*=\s*'([^']+)'/);
+  if (m) return m[1];
+  return val.startsWith("http") ? val.trim() : "";
+}
+
 // Turn one sheet row (as a header→value object) into a Listing
 export function parseRow(f: Record<string, string>): Listing {
   const sheetId = String(f.id || "").trim();
+
+  // Image columns (coverImage/image2…image20) are ignored for now — photos
+  // come from public/photos/<id>/ via the manifest when a folder matches.
   const folderPhotos = photoManifest[sheetId] || [];
-  let coverImage = "";
-  let imagesList: string[] = [];
-
-  // Sheet image columns are the source of truth: coverImage + image2…image20
-  const textImages: string[] = [];
-  if (f.coverImage) textImages.push(f.coverImage);
-  for (let i = 2; i <= 20; i++) {
-    const v = f[`image${i}`];
-    if (v) textImages.push(v);
-  }
-
-  if (textImages.length > 0) {
-    imagesList = textImages.map(normalizeImagePath);
-    coverImage = imagesList[0];
-  } else if (folderPhotos.length > 0) {
-    // Fallback: photos from public/photos/<id>/ matched by the `id` column
-    coverImage = folderPhotos[0];
-    imagesList = folderPhotos;
-  }
 
   return {
     id: sheetId,
@@ -126,26 +119,27 @@ export function parseRow(f: Record<string, string>): Listing {
     price: parseNum(f.price) || 0,
     bedrooms: parseNum(f.bedrooms),
     bathrooms: parseNum(f.bathrooms),
-    carPark: parseNum(f.carPark),
+    carPark: (f.carPark || "").trim(),
     builtUpSqft: parseNum(f.builtUpSqft),
-    landSqft: parseNum(f.landSqft),
-    tenure: f.tenure || "",
+    landSqft: (f.landSqft || "").trim(),
+    tenure: (f["status pemilikan"] || f.tenure || "").trim(),
+    lotStatus: (f["status lot tanah"] || "").trim(),
     furnishing: f.furnishing || "",
     status: (f.status || "available").trim().toLowerCase() || "available",
     featured: parseBool(f.featured),
     isNew: parseBool(f.isNew),
-    coverImage,
-    images: imagesList,
+    coverImage: folderPhotos[0] || "",
+    images: folderPhotos,
     amenities: f.amenities
       ? f.amenities.split(",").map((a: string) => a.trim()).filter(Boolean)
       : [],
     description: f.description || "",
     postedDate: f.postedDate || "",
     area: f.area || "",
-    city: f.city || "Johor Bahru",
+    city: (f.daerah || f.city || "Johor Bahru").trim(),
     state: f.state || "Johor",
     address: f.address || "",
-    mapEmbedUrl: f.mapEmbedUrl || "",
+    mapEmbedUrl: extractMapSrc(f.mapEmbedUrl || ""),
   };
 }
 
@@ -206,9 +200,16 @@ export async function fetchAllListings(
 }
 
 export async function fetchListing(id: string): Promise<Listing | null> {
+  // ids can contain spaces (e.g. "Sub - 001") and arrive URL-encoded
+  let decoded = id;
+  try {
+    decoded = decodeURIComponent(id);
+  } catch {
+    /* keep raw id */
+  }
   const rows = await fetchSheetRows();
   const row = rows
     .filter(isRealRow)
-    .find((f) => String(f.id || "").trim() === id);
+    .find((f) => String(f.id || "").trim() === decoded.trim());
   return row ? parseRow(row) : null;
 }

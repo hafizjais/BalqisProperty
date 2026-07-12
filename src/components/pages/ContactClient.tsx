@@ -155,8 +155,9 @@ export default function ContactClient() {
                 className={inputCls}
               >
                 <option>Buy</option>
-                <option>Rent</option>
                 <option>Sell</option>
+                <option>Shop Lot</option>
+                <option>Land</option>
                 <option>General</option>
               </select>
             </label>

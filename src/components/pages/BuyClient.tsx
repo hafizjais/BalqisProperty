@@ -3,14 +3,14 @@
 import { useState, useMemo } from "react";
 import { Calculator, ChevronDown } from "lucide-react";
 import { useListings } from "@/hooks/useListings";
-import { applyFilters, defaultFilters } from "@/lib/filters";
+import { applyFilters, defaultFilters, isCommercial } from "@/lib/filters";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import FilterBar from "@/components/sections/FilterBar";
 import ListingsResults from "@/components/sections/ListingsResults";
 import CalculatorTabs from "@/components/calculators/CalculatorTabs";
 
 const config = {
-  propertyTypes: ["Terrace", "Semi-D", "Bungalow", "Apartment", "Condo", "Land", "Commercial"],
+  propertyTypes: ["Terrace", "Single Storey", "Double Storey", "Bungalow", "Apartment", "Service Apartment"],
   priceMin: 100000,
   priceMax: 5000000,
   priceStep: 50000,
@@ -23,8 +23,9 @@ export default function BuyClient() {
   const [filters, setFilters] = useState(() => defaultFilters(100000, 5000000));
   const [calcOpen, setCalcOpen] = useState(false);
 
+  // Shop lots and land live under /commercial — Buy shows homes only
   const filtered = useMemo(
-    () => applyFilters(listings, filters),
+    () => applyFilters(listings.filter((l) => !isCommercial(l)), filters),
     [listings, filters]
   );
 
