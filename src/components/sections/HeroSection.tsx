@@ -15,21 +15,27 @@ const stats = [
 
 // Immersive full-bleed hero: edge-to-edge photography with an optional
 // looping video backdrop — drop a file at public/hero-video.mp4 to enable it.
-export default function HeroSection() {
+export default function HeroSection({
+  backgroundImage,
+}: {
+  backgroundImage?: string;
+}) {
   const [videoOk, setVideoOk] = useState(true);
 
   return (
     <section className="relative flex min-h-[92vh] items-end overflow-hidden bg-ink">
-      {/* Edge-to-edge backdrop — photo always, video layered on top when present */}
-      <Image
-        src="/photos/prop-001/cover.jpg"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover opacity-50"
-        aria-hidden
-      />
+      {/* Edge-to-edge backdrop — a real listing photo when one is available */}
+      {backgroundImage && (
+        <Image
+          src={backgroundImage}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-50"
+          aria-hidden
+        />
+      )}
       {videoOk && (
         <video
           autoPlay

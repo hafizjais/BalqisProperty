@@ -3,13 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "node scripts/build-photo-manifest.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/build-photo-manifest.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "photos:manifest": "node scripts/build-photo-manifest.mjs"
+    "lint": "next lint"
   },
   "dependencies": {
     "framer-motion": "^11.11.0",

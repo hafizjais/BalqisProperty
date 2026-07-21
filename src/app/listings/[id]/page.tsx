@@ -10,7 +10,7 @@ import {
   MapPin,
   CheckCircle2,
 } from "lucide-react";
-import { fetchListing } from "@/lib/sheets";
+import { fetchListing } from "@/lib/airtable";
 import { isShopLot, isLand } from "@/lib/filters";
 import { priceLabel } from "@/lib/constants";
 import Breadcrumb from "@/components/ui/Breadcrumb";
@@ -67,6 +67,8 @@ export default async function ListingDetailPage({ params }: Props) {
   const available = (listing.status || "available").toLowerCase() === "available";
   const cat = categoryCrumb(listing);
 
+  // Only show stat tiles that actually have a value in Airtable — missing
+  // fields (e.g. no landSqft for an apartment) are omitted, not shown as "—"
   const stats = [
     { icon: BedDouble, label: "Bedrooms", value: listing.bedrooms },
     { icon: Bath, label: "Bathrooms", value: listing.bathrooms },
@@ -76,14 +78,10 @@ export default async function ListingDetailPage({ params }: Props) {
       label: "Built-up",
       value: listing.builtUpSqft ? `${listing.builtUpSqft.toLocaleString()} sqft` : null,
     },
-    {
-      icon: LandPlot,
-      label: "Lot Size",
-      value: listing.landSqft || null,
-    },
+    { icon: LandPlot, label: "Lot Size", value: listing.landSqft || null },
     { icon: ScrollText, label: "Tenure", value: listing.tenure || null },
     { icon: ScrollText, label: "Lot Status", value: listing.lotStatus || null },
-  ];
+  ].filter((s) => s.value !== null && s.value !== undefined);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 pb-24 sm:px-6 lg:pb-8">

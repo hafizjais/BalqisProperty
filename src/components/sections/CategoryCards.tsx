@@ -4,36 +4,41 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Home, Store, LandPlot, ArrowRight } from "lucide-react";
-import manifestJson from "@/lib/photo-manifest.json";
 
-const manifest: Record<string, string[]> = manifestJson;
+export interface CategoryPhotos {
+  buy?: string;
+  shopLot?: string;
+  land?: string;
+}
 
-const categories = [
-  {
-    href: "/buy",
-    icon: Home,
-    title: "Buy Property",
-    tagline: "Find your dream home in Johor",
-    photo: manifest["prop-001"]?.[0],
-  },
-  {
-    href: "/commercial/shop-lot",
-    icon: Store,
-    title: "Shop Lot",
-    tagline: "Shops & premises for your business",
-    photo: manifest["shoplot-001"]?.[0],
-  },
-  {
-    href: "/commercial/land",
-    icon: LandPlot,
-    title: "Land",
-    tagline: "Lots & land for development",
-    photo: manifest["prop-005"]?.[0],
-  },
-];
+// The 3 category entry points — photo-backed cards overlapping the hero edge.
+// Categories with no listings yet (Shop Lot / Land) simply render without a
+// photo until real listings — and their cover images — exist in Airtable.
+export default function CategoryCards({ photos = {} }: { photos?: CategoryPhotos }) {
+  const categories = [
+    {
+      href: "/buy",
+      icon: Home,
+      title: "Buy Property",
+      tagline: "Find your dream home in Johor",
+      photo: photos.buy,
+    },
+    {
+      href: "/commercial/shop-lot",
+      icon: Store,
+      title: "Shop Lot",
+      tagline: "Shops & premises for your business",
+      photo: photos.shopLot,
+    },
+    {
+      href: "/commercial/land",
+      icon: LandPlot,
+      title: "Land",
+      tagline: "Lots & land for development",
+      photo: photos.land,
+    },
+  ];
 
-// The 3 category entry points — photo-backed cards overlapping the hero edge
-export default function CategoryCards() {
   return (
     <section className="relative z-10 -mt-24 pb-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">

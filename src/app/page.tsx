@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { TrainFront, Map, Wallet, MessageCircle } from "lucide-react";
+import { fetchAllListings } from "@/lib/airtable";
 import HeroSection from "@/components/sections/HeroSection";
 import CategoryCards from "@/components/sections/CategoryCards";
 import FeaturedListings from "@/components/sections/FeaturedListings";
@@ -30,12 +31,19 @@ const whyJB = [
   },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Hero backdrop and category card photo pull from real Airtable listings —
+  // Shop Lot / Land have no listings yet, so those cards render without a
+  // photo until properties (and their cover images) are added.
+  const listings = await fetchAllListings().catch(() => []);
+  const featuredWithPhoto = listings.find((l) => l.featured && l.coverImage);
+  const heroImage = featuredWithPhoto?.coverImage || listings.find((l) => l.coverImage)?.coverImage;
+
   return (
     <>
-      <HeroSection />
+      <HeroSection backgroundImage={heroImage} />
       {/* Category cards overlap the hero's bottom edge */}
-      <CategoryCards />
+      <CategoryCards photos={{ buy: heroImage }} />
 
       {/* Why Johor Bahru? */}
       <section className="bg-cream py-16">

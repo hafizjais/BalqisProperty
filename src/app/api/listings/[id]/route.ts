@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchListing } from "@/lib/sheets";
+import { fetchListing } from "@/lib/airtable";
 
 export async function GET(
   _req: Request,
