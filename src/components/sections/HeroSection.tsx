@@ -8,8 +8,8 @@ import Button from "@/components/ui/Button";
 import { waLink, TELEGRAM_URL } from "@/lib/constants";
 
 const stats = [
-  { value: "200+", label: "Transactions" },
-  { value: "8+", label: "Years Experience" },
+  { value: "8", label: "Transactions" },
+  { value: "3+", label: "Months Experience" },
   { value: "JB", label: "Specialist" },
 ];
 

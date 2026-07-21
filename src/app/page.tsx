@@ -73,7 +73,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <FeaturedListings />
+      <FeaturedListings listings={listings} />
 
       {/* WhatsApp CTA band */}
       <section className="border-y border-copper/25 bg-ink">

@@ -257,7 +257,7 @@ export default function FilterBar({
               onChange={(e) => set({ sort: e.target.value })}
               className={selectCls}
             >
-              <option value="newest">Newest</option>
+              <option value="newest">Default</option>
               <option value="price-asc">Price Low → High</option>
               <option value="price-desc">Price High → Low</option>
             </select>

@@ -39,7 +39,8 @@ const anyKey = (f: Record<string, any>, ...names: string[]): any => {
   return undefined;
 };
 
-// coverImage/images are Airtable attachment fields: [{ url, ... }, ...]
+// images is an Airtable attachment field: [{ url, ... }, ...].
+// The first attachment is used as the card/hero cover photo.
 function attachmentUrls(val: any): string[] {
   if (!Array.isArray(val)) return [];
   return val.map((a) => a?.url).filter(Boolean);
@@ -54,12 +55,15 @@ function extractMapSrc(val: string): string {
   return val.startsWith("http") ? val.trim() : "";
 }
 
-// Turn one Airtable record into a Listing
-export function parseRecord(record: any): Listing {
+// Turn one Airtable record into a Listing.
+// includeGallery controls whether the full `images` array is populated —
+// list views (property cards) only ever show `coverImage`, so the bulk
+// /api/listings endpoint omits the full gallery to keep payloads small.
+// Only the single-listing detail page needs the complete photo set.
+export function parseRecord(record: any, includeGallery = true): Listing {
   const f = record.fields;
 
-  const images = attachmentUrls(f.images);
-  const cover = attachmentUrls(f.coverImage);
+  const fullGallery = attachmentUrls(f.images);
 
   return {
     id: String(f.id || "").trim(),
@@ -80,8 +84,8 @@ export function parseRecord(record: any): Listing {
     furnishing: f.furnishing || "",
     status: (joinField(f.status) || "available").toLowerCase(),
     featured: parseBool(f.featured),
-    coverImage: cover[0] || images[0] || "",
-    images: images.length > 0 ? images : cover,
+    coverImage: fullGallery[0] || "",
+    images: includeGallery ? fullGallery : [],
     amenities: f.amenities
       ? String(f.amenities).split(",").map((a: string) => a.trim()).filter(Boolean)
       : [],
@@ -136,11 +140,18 @@ export async function fetchAllListings(
   listingType?: string | null
 ): Promise<Listing[]> {
   const records = await fetchAllRecords();
-  let listings = records.filter(isRealRecord).map(parseRecord);
+  // Grid/card views only ever show coverImage — omit the full photo gallery
+  // here to keep this payload small; fetchListing() below has the full set.
+  let listings = records.filter(isRealRecord).map((r) => parseRecord(r, false));
   if (listingType) {
     listings = listings.filter((l) => l.listingType === listingType);
   }
   return listings;
+}
+
+// Escape a value for safe use inside an Airtable filterByFormula string literal
+function escapeFormulaValue(value: string): string {
+  return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
 }
 
 export async function fetchListing(id: string): Promise<Listing | null> {
@@ -150,9 +161,25 @@ export async function fetchListing(id: string): Promise<Listing | null> {
   } catch {
     /* keep raw id */
   }
-  const records = await fetchAllRecords();
-  const record = records
-    .filter(isRealRecord)
-    .find((r) => String(r.fields.id || "").trim() === decoded.trim());
-  return record ? parseRecord(record) : null;
+  decoded = decoded.trim();
+
+  // Targeted lookup via filterByFormula — avoids downloading every record
+  // (with full photo galleries) just to find the one the visitor asked for.
+  const url = new URL(BASE_URL);
+  url.searchParams.set("maxRecords", "1");
+  url.searchParams.set("filterByFormula", `{id}="${escapeFormulaValue(decoded)}"`);
+
+  const res = await fetch(url.toString(), {
+    headers: { Authorization: `Bearer ${PAT}` },
+    next: { revalidate: 300 },
+  });
+
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    throw new Error(`Airtable fetch failed (${res.status}): ${body.slice(0, 200)}`);
+  }
+
+  const data = await res.json();
+  const record = (data.records || [])[0];
+  return record && isRealRecord(record) ? parseRecord(record, true) : null;
 }

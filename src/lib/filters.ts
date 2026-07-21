@@ -95,7 +95,11 @@ export function applyFilters(listings: Listing[], f: Filters): Listing[] {
 
   if (f.sort === "price-asc") out.sort((a, b) => a.price - b.price);
   else if (f.sort === "price-desc") out.sort((a, b) => b.price - a.price);
-  else out.sort((a, b) => (b.postedDate || "").localeCompare(a.postedDate || ""));
+  // Default: oldest → newest by Airtable's row-creation time. Airtable's API
+  // has no reliable "row order" of its own (it doesn't match the Grid view
+  // you see or drag-reorder), so this is what makes newly added listings
+  // land at the bottom, matching how the table is actually built up.
+  else out.sort((a, b) => (a.postedDate || "").localeCompare(b.postedDate || ""));
 
   return out;
 }
