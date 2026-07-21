@@ -46,6 +46,7 @@ export function formatRM(value: number): string {
 }
 
 export function priceLabel(listing: { price: number; listingType: string }): string {
+  if (!listing.price) return "Price on Request";
   const base = formatRM(listing.price);
   return listing.listingType === "rent" || listing.listingType === "room-rent"
     ? `${base}/month`

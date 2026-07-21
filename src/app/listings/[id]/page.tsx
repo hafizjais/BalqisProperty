@@ -99,7 +99,6 @@ export default async function ListingDetailPage({ params }: Props) {
                 ? listingTypeLabel[listing.listingType] || listing.listingType || "Listing"
                 : listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
             </Badge>
-            {listing.isNew && available && <Badge variant="rent">New</Badge>}
             {listing.furnishing && <Badge>{listing.furnishing}</Badge>}
             {listing.lotStatus && <Badge>{listing.lotStatus}</Badge>}
           </div>

@@ -15,7 +15,6 @@ export interface Listing {
   furnishing: string;
   status: string; // "available" | "sold" | "rented"
   featured: boolean;
-  isNew: boolean;
   coverImage: string;
   images: string[];
   amenities: string[];

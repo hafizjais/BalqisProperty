@@ -60,7 +60,9 @@ export function applyFilters(listings: Listing[], f: Filters): Listing[] {
       if (!hay.includes(f.propertyType.toLowerCase())) return false;
     }
 
-    if (l.price < f.priceMin || l.price > f.priceMax) return false;
+    // A price of 0 means "not set yet" (e.g. a brand new draft listing) —
+    // don't let the price slider hide it before Balqis fills in a price.
+    if (l.price > 0 && (l.price < f.priceMin || l.price > f.priceMax)) return false;
 
     if (f.bedrooms !== "any") {
       const min = parseInt(f.bedrooms, 10);

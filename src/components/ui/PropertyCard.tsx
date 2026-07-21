@@ -59,7 +59,6 @@ export default function PropertyCard({ listing }: { listing: Listing }) {
               ? listingTypeLabel[listing.listingType] || listing.listingType || "Listing"
               : statusLabel}
           </Badge>
-          {listing.isNew && available && <Badge variant="rent">New</Badge>}
         </div>
       </div>
 

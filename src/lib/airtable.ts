@@ -63,7 +63,9 @@ export function parseRecord(record: any): Listing {
 
   return {
     id: String(f.id || "").trim(),
-    title: f.title || "",
+    // New rows often get an id before anything else is filled in — show a
+    // placeholder title rather than a blank card until Balqis fills it in.
+    title: f.title || "New Listing — Details Coming Soon",
     listingType: joinField(f.listingType).toLowerCase(),
     propertyType: joinField(f.propertyType).toLowerCase(),
     subType: f.subType || "",
@@ -78,7 +80,6 @@ export function parseRecord(record: any): Listing {
     furnishing: f.furnishing || "",
     status: (joinField(f.status) || "available").toLowerCase(),
     featured: parseBool(f.featured),
-    isNew: parseBool(f.isNew),
     coverImage: cover[0] || images[0] || "",
     images: images.length > 0 ? images : cover,
     amenities: f.amenities
@@ -94,9 +95,10 @@ export function parseRecord(record: any): Listing {
   };
 }
 
+// Only an id is required — a row appears on the site the moment it's created
+// in Airtable, even before price, photos, or a title are filled in.
 function isRealRecord(record: any): boolean {
-  const id = String(record.fields?.id || "").trim();
-  return Boolean(id) && Boolean(String(record.fields?.title || "").trim());
+  return Boolean(String(record.fields?.id || "").trim());
 }
 
 // ---------------------------------------------------------------------------
