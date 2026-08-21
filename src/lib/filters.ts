@@ -53,7 +53,7 @@ export function defaultFilters(priceMin: number, priceMax: number): Filters {
 
 export function applyFilters(listings: Listing[], f: Filters): Listing[] {
   const out = listings.filter((l) => {
-    if (f.areas.length > 0 && !f.areas.includes(l.area)) return false;
+    if (f.areas.length > 0 && !l.areas.some((a) => f.areas.includes(a))) return false;
 
     if (f.propertyType !== "any") {
       const hay = `${l.propertyType} ${l.subType}`.toLowerCase();

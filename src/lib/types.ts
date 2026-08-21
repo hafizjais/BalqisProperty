@@ -21,7 +21,8 @@ export interface Listing {
   amenities: string[];
   description: string;
   postedDate: string;
-  area: string;
+  area: string; // display string, e.g. "Pulai Mutiara, Tampoi"
+  areas: string[]; // individual areas — a listing can cover more than one
   city: string;
   state: string;
   address: string;

@@ -180,7 +180,7 @@ export default async function ListingDetailPage({ params }: Props) {
         </aside>
       </div>
 
-      <MoreListings area={listing.area} excludeId={listing.id} />
+      <MoreListings areas={listing.areas} excludeId={listing.id} />
     </div>
   );
 }

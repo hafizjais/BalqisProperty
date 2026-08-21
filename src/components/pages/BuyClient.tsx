@@ -26,6 +26,13 @@ export default function BuyClient() {
     [listings, filters]
   );
 
+  // Every area currently in use across listings — a new area added in
+  // Airtable shows up in the filter automatically, no code change needed.
+  const areaOptions = useMemo(
+    () => Array.from(new Set(listings.flatMap((l) => l.areas))).sort(),
+    [listings]
+  );
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
       <Breadcrumb
@@ -39,7 +46,12 @@ export default function BuyClient() {
       </p>
 
       <div className="mt-6">
-        <FilterBar filters={filters} onChange={setFilters} config={config} />
+        <FilterBar
+          filters={filters}
+          onChange={setFilters}
+          config={config}
+          areaOptions={areaOptions}
+        />
       </div>
 
       <div className="mt-8">

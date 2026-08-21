@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown, RotateCcw } from "lucide-react";
-import { JB_AREAS, formatRM } from "@/lib/constants";
+import { ChevronDown, RotateCcw, Search } from "lucide-react";
+import { formatRM } from "@/lib/constants";
 import type { Filters } from "@/lib/filters";
 
 export interface FilterConfig {
@@ -24,13 +24,22 @@ export default function FilterBar({
   filters,
   onChange,
   config,
+  areaOptions,
 }: {
   filters: Filters;
   onChange: (f: Filters) => void;
   config: FilterConfig;
+  // Every distinct area currently in use across listings — sourced from
+  // Airtable data, so a newly added area shows up here automatically.
+  areaOptions: string[];
 }) {
   const [areasOpen, setAreasOpen] = useState(false);
+  const [areaSearch, setAreaSearch] = useState("");
   const areasRef = useRef<HTMLDivElement>(null);
+
+  const visibleAreas = areaOptions.filter((a) =>
+    a.toLowerCase().includes(areaSearch.trim().toLowerCase())
+  );
 
   useEffect(() => {
     function onClickOutside(e: MouseEvent) {
@@ -87,21 +96,40 @@ export default function FilterBar({
             <ChevronDown className="h-4 w-4 shrink-0 text-warm-grey" aria-hidden />
           </button>
           {areasOpen && (
-            <div className="absolute z-40 mt-1 max-h-64 w-64 overflow-auto rounded-xl border border-peach bg-graphite p-2 shadow-card-hover">
-              {JB_AREAS.map((area) => (
-                <label
-                  key={area}
-                  className="flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 text-sm hover:bg-cream"
-                >
-                  <input
-                    type="checkbox"
-                    checked={filters.areas.includes(area)}
-                    onChange={() => toggleArea(area)}
-                    className="accent-copper"
-                  />
-                  {area}
-                </label>
-              ))}
+            <div className="absolute z-40 mt-1 w-64 rounded-xl border border-peach bg-graphite p-2 shadow-card-hover">
+              <div className="relative mb-2">
+                <Search
+                  className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-warm-grey"
+                  aria-hidden
+                />
+                <input
+                  type="text"
+                  value={areaSearch}
+                  onChange={(e) => setAreaSearch(e.target.value)}
+                  placeholder="Search area…"
+                  aria-label="Search areas"
+                  className="w-full rounded-lg border border-peach bg-cream py-1.5 pl-8 pr-2 text-sm text-espresso"
+                />
+              </div>
+              <div className="max-h-56 overflow-auto">
+                {visibleAreas.length === 0 && (
+                  <p className="px-2 py-1.5 text-sm text-warm-grey">No areas found</p>
+                )}
+                {visibleAreas.map((area) => (
+                  <label
+                    key={area}
+                    className="flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 text-sm hover:bg-cream"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={filters.areas.includes(area)}
+                      onChange={() => toggleArea(area)}
+                      className="accent-copper"
+                    />
+                    {area}
+                  </label>
+                ))}
+              </div>
             </div>
           )}
         </div>

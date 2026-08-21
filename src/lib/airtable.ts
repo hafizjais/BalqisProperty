@@ -39,6 +39,14 @@ const anyKey = (f: Record<string, any>, ...names: string[]): any => {
   return undefined;
 };
 
+// "area" was migrated to a multi-select — a listing can now cover more than
+// one area (e.g. "Pulai Mutiara" and "Tampoi"). Normalise either shape
+// (string[] or plain string) into a flat array for filtering/matching.
+const toList = (val: any): string[] => {
+  if (Array.isArray(val)) return val.map((v) => String(v).trim()).filter(Boolean);
+  return val ? [String(val).trim()] : [];
+};
+
 // images is an Airtable attachment field: [{ url, ... }, ...].
 // The first attachment is used as the card/hero cover photo.
 function attachmentUrls(val: any): string[] {
@@ -92,7 +100,8 @@ export function parseRecord(record: any, includeGallery = true): Listing {
       : [],
     description: f.description || "",
     postedDate: f.postedDate || record.createdTime || "",
-    area: f.area || "",
+    area: joinField(f.area),
+    areas: toList(f.area),
     city: f.city || "Johor Bahru",
     state: f.state || "Johor",
     address: f.address || "",

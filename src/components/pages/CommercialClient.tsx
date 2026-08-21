@@ -61,6 +61,13 @@ export default function CommercialClient({
     [commercial, filters]
   );
 
+  // Every area currently in use across commercial listings — a new area
+  // added in Airtable shows up in the filter automatically.
+  const areaOptions = useMemo(
+    () => Array.from(new Set(commercial.flatMap((l) => l.areas))).sort(),
+    [commercial]
+  );
+
   const crumbs = [
     { label: "Home", href: "/" },
     meta[category].crumb
@@ -97,7 +104,12 @@ export default function CommercialClient({
       </div>
 
       <div className="mt-6">
-        <FilterBar filters={filters} onChange={setFilters} config={config} />
+        <FilterBar
+          filters={filters}
+          onChange={setFilters}
+          config={config}
+          areaOptions={areaOptions}
+        />
       </div>
 
       <div className="mt-8">
