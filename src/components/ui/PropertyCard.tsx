@@ -60,6 +60,13 @@ export default function PropertyCard({ listing }: { listing: Listing }) {
               : statusLabel}
           </Badge>
         </div>
+        {!available && (
+          <div className="absolute inset-0 z-[2] flex items-center justify-center">
+            <span className="-rotate-12 rounded-md border-4 border-white/90 px-4 py-1 text-2xl font-extrabold uppercase tracking-widest text-white/90 [text-shadow:0_2px_6px_rgba(0,0,0,0.5)]">
+              {statusLabel}
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="p-4">
