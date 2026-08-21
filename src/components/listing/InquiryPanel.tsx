@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { MessageCircle, Share2, Check } from "lucide-react";
 import type { Listing } from "@/lib/types";
-import { priceLabel, waLink } from "@/lib/constants";
+import { priceLabel, formatRM, waLink } from "@/lib/constants";
 
 function inquiryUrl(listing: Listing): string {
   return waLink(
@@ -38,6 +38,11 @@ export default function InquiryPanel({ listing }: { listing: Listing }) {
         <p className="font-display text-3xl font-bold text-copper">
           {priceLabel(listing)}
         </p>
+        {listing.marketValue ? (
+          <p className="mt-1 text-sm text-warm-grey">
+            Market Value: {formatRM(listing.marketValue)}
+          </p>
+        ) : null}
         <div className="mt-5 space-y-3">
           <a
             href={inquiryUrl(listing)}

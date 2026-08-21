@@ -115,7 +115,8 @@ Each page file has an `export const metadata = { title, description }` block nea
 | Field | What it controls |
 |---|---|
 | `id` | Unique identifier — **required** for a listing to appear at all |
-| `title`, `price`, `subType`, `bedrooms`, `bathrooms`, `carPark`, `builtUpSqft`, `landSqft` | Card & detail page basics |
+| `title`, `price`, `marketValue`, `subType`, `bedrooms`, `bathrooms`, `carPark`, `builtUpSqft`, `landSqft` | Card & detail page basics |
+| `marketValue` | Optional currency field — shown as "Market Value: RM X" under the price on the property card and listing detail page when filled in |
 | `listingType` | `sale` (only type currently in use) |
 | `status pemilikan` | Tenure (Freehold/Leasehold) |
 | `status lot tanah` | Lot status (Bumiputera/Non Bumi/International/Malay Reserved) |

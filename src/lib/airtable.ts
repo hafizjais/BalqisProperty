@@ -74,6 +74,7 @@ export function parseRecord(record: any, includeGallery = true): Listing {
     propertyType: joinField(f.propertyType).toLowerCase(),
     subType: f.subType || "",
     price: parseNum(f.price) || 0,
+    marketValue: parseNum(f.marketValue),
     bedrooms: parseNum(f.bedrooms),
     bathrooms: parseNum(f.bathrooms),
     carPark: joinField(f.carPark),

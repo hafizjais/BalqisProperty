@@ -5,6 +5,7 @@ export interface Listing {
   propertyType: string; // "residential" | "commercial" | "land" ...
   subType: string; // "Terrace", "Condo", "Shophouse" ...
   price: number;
+  marketValue: number | null;
   bedrooms: number | null;
   bathrooms: number | null;
   carPark: string; // free text in the sheet, e.g. "2-3"

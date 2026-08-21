@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import Badge, { listingTypeLabel } from "@/components/ui/Badge";
 import type { Listing } from "@/lib/types";
-import { priceLabel, waLink } from "@/lib/constants";
+import { priceLabel, formatRM, waLink } from "@/lib/constants";
 
 function inquiryMessage(listing: Listing): string {
   if (listing.listingType === "room-rent") {
@@ -64,6 +64,11 @@ export default function PropertyCard({ listing }: { listing: Listing }) {
 
       <div className="p-4">
         <p className="text-lg font-bold text-copper">{priceLabel(listing)}</p>
+        {listing.marketValue ? (
+          <p className="text-xs text-warm-grey">
+            Market Value: {formatRM(listing.marketValue)}
+          </p>
+        ) : null}
         <h3 className="mt-1 line-clamp-2 font-semibold text-espresso">
           {listing.title}
         </h3>

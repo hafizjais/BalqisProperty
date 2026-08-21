@@ -17,6 +17,7 @@ const links = [
       { href: "/commercial/land", label: "Land" },
     ],
   },
+  { href: "/calculator", label: "Calculator" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
