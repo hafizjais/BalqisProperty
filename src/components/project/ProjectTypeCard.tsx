@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { BedDouble, Bath, Ruler, MessageCircle } from "lucide-react";
+import { BedDouble, Bath, Ruler, Car, MessageCircle } from "lucide-react";
 import type { Project, ProjectUnitType } from "@/lib/types";
 import { formatRM, waLink } from "@/lib/constants";
 
@@ -11,7 +11,7 @@ export default function ProjectTypeCard({
   project: Project;
 }) {
   const available = (type.status || "available").toLowerCase() === "available";
-  const image = type.floorPlan || type.images[0] || project.coverImage;
+  const image = type.floorPlan || project.coverImage;
 
   const inquiryMessage = `Hi Balqis, saya berminat dengan ${project.projectName} - ${type.typeName}. Boleh share more details?`;
 
@@ -23,7 +23,13 @@ export default function ProjectTypeCard({
     >
       {image && (
         <div className="relative h-48 w-full shrink-0 sm:h-auto sm:w-56">
-          <Image src={image} alt={`${type.typeName} floor plan`} fill sizes="224px" className="object-cover" />
+          <Image
+            src={image}
+            alt={type.floorPlan ? `${type.typeName} floor plan` : project.projectName}
+            fill
+            sizes="224px"
+            className={type.floorPlan ? "object-contain bg-cream p-2" : "object-cover"}
+          />
         </div>
       )}
 
@@ -44,7 +50,7 @@ export default function ProjectTypeCard({
           </p>
 
           <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-warm-grey">
-            {type.bedrooms !== null && (
+            {type.bedrooms && (
               <span className="flex items-center gap-1">
                 <BedDouble className="h-4 w-4" aria-hidden />
                 {type.bedrooms}
@@ -60,6 +66,12 @@ export default function ProjectTypeCard({
               <span className="flex items-center gap-1">
                 <Ruler className="h-4 w-4" aria-hidden />
                 {type.builtUpSqft.toLocaleString()} sqft
+              </span>
+            )}
+            {type.carPark && (
+              <span className="flex items-center gap-1">
+                <Car className="h-4 w-4" aria-hidden />
+                {type.carPark}
               </span>
             )}
           </div>

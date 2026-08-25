@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import { MapPin, CheckCircle2, MessageCircle } from "lucide-react";
+import { MapPin, MessageCircle } from "lucide-react";
 import { fetchProject } from "@/lib/airtable-projects";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Badge from "@/components/ui/Badge";
 import Gallery from "@/components/listing/Gallery";
 import ProjectTypeCard from "@/components/project/ProjectTypeCard";
-import { waLink } from "@/lib/constants";
+import { formatRM, waLink } from "@/lib/constants";
 
 export const revalidate = 300;
 
@@ -59,7 +60,9 @@ export default async function ProjectDetailPage({ params }: Props) {
 
       <div className="mt-8">
         <div className="flex flex-wrap items-center gap-2">
-          <Badge variant={project.projectStage.toLowerCase()}>{project.projectStage}</Badge>
+          {project.projectStage && (
+            <Badge variant={project.projectStage.toLowerCase()}>{project.projectStage}</Badge>
+          )}
           {project.tenure && <Badge>{project.tenure}</Badge>}
         </div>
 
@@ -75,21 +78,10 @@ export default async function ProjectDetailPage({ params }: Props) {
             .filter(Boolean)
             .join(", ")}
         </p>
-
-        {project.amenities.length > 0 && (
-          <section className="mt-8">
-            <h2 className="font-display text-2xl font-bold text-espresso">
-              Facilities
-            </h2>
-            <ul className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {project.amenities.map((a) => (
-                <li key={a} className="flex items-center gap-2 text-sm text-espresso">
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-copper" aria-hidden />
-                  {a}
-                </li>
-              ))}
-            </ul>
-          </section>
+        {project.priceFrom > 0 && (
+          <p className="mt-3 font-display text-2xl font-bold text-copper">
+            From {formatRM(project.priceFrom)}
+          </p>
         )}
 
         {project.description && (
@@ -100,6 +92,23 @@ export default async function ProjectDetailPage({ params }: Props) {
             <p className="mt-4 whitespace-pre-line leading-relaxed text-espresso/90">
               {project.description}
             </p>
+          </section>
+        )}
+
+        {project.siteFloorMap && (
+          <section className="mt-8">
+            <h2 className="font-display text-2xl font-bold text-espresso">
+              Site / Master Plan
+            </h2>
+            <div className="relative mt-4 h-72 w-full overflow-hidden rounded-2xl border border-peach bg-cream shadow-card sm:h-96">
+              <Image
+                src={project.siteFloorMap}
+                alt={`${project.projectName} site plan`}
+                fill
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                className="object-contain p-3"
+              />
+            </div>
           </section>
         )}
 

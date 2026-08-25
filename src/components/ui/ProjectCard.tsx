@@ -31,9 +31,11 @@ export default function ProjectCard({ project }: { project: Project }) {
             aria-hidden
           />
         )}
-        <div className="absolute left-3 top-3 z-[2] flex gap-2">
-          <Badge variant={project.projectStage.toLowerCase()}>{project.projectStage}</Badge>
-        </div>
+        {project.projectStage && (
+          <div className="absolute left-3 top-3 z-[2] flex gap-2">
+            <Badge variant={project.projectStage.toLowerCase()}>{project.projectStage}</Badge>
+          </div>
+        )}
       </div>
 
       <div className="p-4">

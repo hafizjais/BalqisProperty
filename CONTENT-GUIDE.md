@@ -133,26 +133,30 @@ Each page file has an `export const metadata = { title, description }` block nea
 
 ## 🏗️ New Project launches — a separate Airtable sheet
 
-**Sheet:** create a new table in the same base, e.g. "Projects". One row = one **unit type** within a project (e.g. "Emerald Residence — Type A"). Rows sharing the same `projectId` are grouped into one project page on the site — the project's shared info (name, developer, photos, description, facilities) only needs to be correct on one of its rows, but keeping it consistent across all of a project's rows is safest.
+**Sheet:** a separate table in the same base (the "Project" sheet). One row = one **unit type** within a project (e.g. "Monterra Johor Bahru — Type A"). Rows are grouped into one project page by matching **`title`** (the project name) — every unit type row belonging to the same project must have that field spelled identically. There's no separate project-code column; the project name itself is the grouping key, so double-check spelling stays consistent as you add rows.
 
 | Field | What it controls |
 |---|---|
 | `id` | Unique identifier for this row — **required** |
-| `projectId` | Short code shared by every unit type in the same project, e.g. `EMR01` — **required**, this is what groups rows into one project card |
-| `projectName` | Project name shown as the page title |
-| `developer` | Shown as "by [developer]" |
-| `projectStage` | `New Launch`, `Under Construction`, or `Ready to Move In` — shown as a badge |
-| `tenure` | Freehold / Leasehold |
-| `typeName` | e.g. "Type A", "Type B" — one unit type per row |
-| `bedrooms`, `bathrooms`, `builtUpSqft` | Unit type specs |
-| `price` | Currency — the lowest `price` across a project's rows shows as "From RM X" on the project card |
-| `status` | `available` or `sold out` — per unit type |
-| `floorPlan` | Attachment — this unit type's floor plan image |
-| `images` | Attachment — project photo gallery (shared across all a project's rows) |
-| `description`, `amenities`, `area`, `city`, `state`, `address`, `mapEmbedUrl` | Project-level detail page content (same format as the listings table) |
+| `title` | Project name — shown as the page title, and **must match exactly** across every unit type row of the same project (this is what groups them together) |
+| `Developer` | Shown as "by [developer]" |
+| `tenure` | Shown as a badge (e.g. "Freehold", "Leasehold Commercial") |
+| `type house` | e.g. "Type A", "Type B" — one unit type per row |
+| `bedrooms` | Free text — supports layouts like "1+1", not just plain numbers |
+| `bathrooms`, `builtUpSqft` | Unit type specs (numbers) |
+| `carPark` | Free text, e.g. "1" or "2-3" |
+| `price` | Currency — the lowest `price` across a project's rows shows as "From RM X" on the project card and detail page |
+| `status` | `available` or `sold out` — per unit type, shown as a "Sold Out" tag |
+| `unitPlan` | Attachment — this unit type's floor plan image |
+| `gallery` | Attachment — project photo gallery, shown on the project card and detail-page gallery. Fill this in on at least one row per project (falls back to floor plan/site plan images if empty) |
+| `siteFloorMap` | Attachment — the project's overall site/master plan, shown once in its own "Site / Master Plan" section |
+| `description` | Project description shown under "About this project" — free text, facilities can just be listed inside it |
+| `area`, `address`, `mapEmbedURL` | Location — same format as the listings table (`mapEmbedURL` takes the full Google Maps embed `<iframe>` snippet) |
 | `featured` | Checkbox — reserved for future use |
 
-**Where it appears:** the **Project** nav tab (`/project`) lists every project as a card ("From RM X", stage badge, area, number of unit types). Clicking a project opens `/project/[projectId]` with the full gallery, description, facilities, and every unit type as its own card with a dedicated WhatsApp inquiry button.
+Not currently used but easy to add later if you want them: `projectStage` (a single-select column with values like "New Launch" / "Under Construction" / "Ready to Move In" would automatically show as a badge, the same way `tenure` does), and a dedicated project-code column (safer than relying on exact `title` spelling once you have many projects).
+
+**Where it appears:** the **Project** nav tab (`/project`) lists every project as a card ("From RM X", area, number of unit types). Clicking a project opens `/project/[project-name-slug]` with the full gallery, description, site plan, and every unit type as its own card with a dedicated WhatsApp inquiry button.
 
 ---
 

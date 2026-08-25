@@ -30,38 +30,42 @@ export interface Listing {
 }
 
 // One row in the "Project" Airtable sheet = one unit type within a
-// developer project (e.g. "Emerald Residence" / "Type A"). Rows sharing the
-// same projectId are grouped into a single Project on the site.
+// developer project (e.g. "Monterra Johor Bahru" / "Type A"). Rows sharing
+// the same `title` (project name) are grouped into a single Project on the
+// site — there's no separate project-code column, so the project name
+// itself is the grouping key (must be spelled identically across a
+// project's rows).
 export interface ProjectUnitType {
   id: string;
-  projectId: string;
   typeName: string; // "Type A", "Type B" ...
-  bedrooms: number | null;
+  bedrooms: string; // free text — condo layouts use "1+1" etc, not a plain number
   bathrooms: number | null;
   builtUpSqft: number | null;
+  carPark: string;
   price: number; // 0 = "Price on Request"
   status: string; // "available" | "sold out"
   floorPlan: string;
-  images: string[];
 }
 
 // A project card groups all its unit-type rows together for display.
+// `projectId` is a URL-safe slug derived from the project name, not a
+// separate Airtable column.
 export interface Project {
   projectId: string;
   projectName: string;
   developer: string;
-  projectStage: string; // "New Launch" | "Under Construction" | "Ready to Move In"
+  projectStage: string; // "New Launch" | "Under Construction" | "Ready to Move In" — blank until that column exists
   tenure: string;
   description: string;
-  amenities: string[];
   area: string;
   areas: string[];
   city: string;
   state: string;
   address: string;
   mapEmbedUrl: string;
+  siteFloorMap: string; // overall project site/master plan image
   coverImage: string;
-  images: string[];
+  images: string[]; // project photo gallery
   priceFrom: number;
   featured: boolean;
   postedDate: string;
