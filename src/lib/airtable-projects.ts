@@ -41,7 +41,7 @@ interface RawRow {
   areas: string[];
   address: string;
   mapEmbedUrl: string;
-  siteFloorMap: string;
+  siteFloorMap: string[];
   gallery: string[];
   featured: boolean;
   postedDate: string;
@@ -72,7 +72,7 @@ function parseRow(record: any): RawRow {
     areas: toList(f.area),
     address: f.address || "",
     mapEmbedUrl: extractMapSrc(anyKey(f, "mapEmbedURL", "mapEmbedUrl") || ""),
-    siteFloorMap: attachmentUrls(f.siteFloorMap)[0] || "",
+    siteFloorMap: attachmentUrls(f.siteFloorMap),
     gallery: attachmentUrls(f.gallery),
     featured: parseBool(f.featured),
     postedDate: record.createdTime || "",
@@ -147,11 +147,13 @@ function groupIntoProjects(rows: RawRow[]): Project[] {
     types.sort((a, b) => (a.price || Infinity) - (b.price || Infinity));
 
     const prices = types.map((t) => t.price).filter((p) => p > 0);
+    // Every site plan photo across this project's rows, deduplicated.
+    const siteFloorMap = Array.from(new Set(projectRows.flatMap((r) => r.siteFloorMap)));
     // Prefer real project photos; fall back to floor plan / site plan
     // images so a card never shows a blank placeholder unnecessarily.
     const gallery = projectRows.flatMap((r) => r.gallery);
     const fallbackImages = [
-      ...projectRows.map((r) => r.siteFloorMap).filter(Boolean),
+      ...siteFloorMap,
       ...types.map((t) => t.floorPlan).filter(Boolean),
     ];
     const images = gallery.length > 0 ? gallery : fallbackImages;
@@ -169,7 +171,7 @@ function groupIntoProjects(rows: RawRow[]): Project[] {
       state: "Johor",
       address: first.address,
       mapEmbedUrl: first.mapEmbedUrl,
-      siteFloorMap: projectRows.map((r) => r.siteFloorMap).find(Boolean) || "",
+      siteFloorMap,
       coverImage: images[0] || "",
       images,
       priceFrom: prices.length > 0 ? Math.min(...prices) : 0,

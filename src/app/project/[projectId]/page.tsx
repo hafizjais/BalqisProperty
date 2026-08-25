@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MapPin, MessageCircle } from "lucide-react";
 import { fetchProject } from "@/lib/airtable-projects";
@@ -56,7 +55,22 @@ export default async function ProjectDetailPage({ params }: Props) {
         ]}
       />
 
-      <Gallery images={project.images} title={project.projectName} />
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
+        <div className="lg:col-span-3">
+          <Gallery images={project.images} title={project.projectName} />
+        </div>
+        {project.siteFloorMap.length > 0 && (
+          <div className="lg:col-span-1">
+            <h2 className="mb-3 font-display text-lg font-bold text-espresso">
+              Site / Master Plan
+            </h2>
+            <Gallery
+              images={project.siteFloorMap}
+              title={`${project.projectName} site plan`}
+            />
+          </div>
+        )}
+      </div>
 
       <div className="mt-8">
         <div className="flex flex-wrap items-center gap-2">
@@ -92,23 +106,6 @@ export default async function ProjectDetailPage({ params }: Props) {
             <p className="mt-4 whitespace-pre-line leading-relaxed text-espresso/90">
               {project.description}
             </p>
-          </section>
-        )}
-
-        {project.siteFloorMap && (
-          <section className="mt-8">
-            <h2 className="font-display text-2xl font-bold text-espresso">
-              Site / Master Plan
-            </h2>
-            <div className="relative mt-4 h-72 w-full overflow-hidden rounded-2xl border border-peach bg-cream shadow-card sm:h-96">
-              <Image
-                src={project.siteFloorMap}
-                alt={`${project.projectName} site plan`}
-                fill
-                sizes="(max-width: 1024px) 100vw, 1024px"
-                className="object-contain p-3"
-              />
-            </div>
           </section>
         )}
 

@@ -1,5 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
-import { BedDouble, Bath, Ruler, Car, MessageCircle } from "lucide-react";
+import { BedDouble, Bath, Ruler, Car, MessageCircle, Expand, X } from "lucide-react";
 import type { Project, ProjectUnitType } from "@/lib/types";
 import { formatRM, waLink } from "@/lib/constants";
 
@@ -10,10 +13,12 @@ export default function ProjectTypeCard({
   type: ProjectUnitType;
   project: Project;
 }) {
+  const [lightbox, setLightbox] = useState(false);
   const available = (type.status || "available").toLowerCase() === "available";
   const image = type.floorPlan || project.coverImage;
 
   const inquiryMessage = `Hi Balqis, saya berminat dengan ${project.projectName} - ${type.typeName}. Boleh share more details?`;
+  const imageAlt = type.floorPlan ? `${type.typeName} floor plan` : project.projectName;
 
   return (
     <div
@@ -22,15 +27,24 @@ export default function ProjectTypeCard({
       }`}
     >
       {image && (
-        <div className="relative h-48 w-full shrink-0 sm:h-auto sm:w-56">
+        <button
+          type="button"
+          onClick={() => setLightbox(true)}
+          aria-label={`View full ${imageAlt}`}
+          className="group relative h-48 w-full shrink-0 cursor-zoom-in sm:h-auto sm:w-56"
+        >
           <Image
             src={image}
-            alt={type.floorPlan ? `${type.typeName} floor plan` : project.projectName}
+            alt={imageAlt}
             fill
             sizes="224px"
             className={type.floorPlan ? "object-contain bg-cream p-2" : "object-cover"}
           />
-        </div>
+          <span className="absolute bottom-2 right-2 flex items-center gap-1 rounded-full bg-ink/70 px-2.5 py-1 text-xs text-white transition-colors group-hover:bg-ink">
+            <Expand className="h-3.5 w-3.5" aria-hidden />
+            View
+          </span>
+        </button>
       )}
 
       <div className="flex flex-1 flex-col justify-between p-4">
@@ -87,6 +101,28 @@ export default function ProjectTypeCard({
           Inquire about {type.typeName}
         </a>
       </div>
+
+      {lightbox && image && (
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label={imageAlt}
+          onClick={() => setLightbox(false)}
+        >
+          <button
+            type="button"
+            onClick={() => setLightbox(false)}
+            aria-label="Close"
+            className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
+          >
+            <X className="h-6 w-6" aria-hidden />
+          </button>
+          <div className="relative h-[85vh] w-full max-w-4xl">
+            <Image src={image} alt={imageAlt} fill sizes="100vw" className="object-contain" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

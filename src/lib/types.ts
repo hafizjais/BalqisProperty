@@ -63,7 +63,7 @@ export interface Project {
   state: string;
   address: string;
   mapEmbedUrl: string;
-  siteFloorMap: string; // overall project site/master plan image
+  siteFloorMap: string[]; // overall project site/master plan photos
   coverImage: string;
   images: string[]; // project photo gallery
   priceFrom: number;
