@@ -17,9 +17,9 @@ export interface CategoryPhotos {
 export default function CategoryCards({ photos = {} }: { photos?: CategoryPhotos }) {
   const categories = [
     {
-      href: "/buy",
+      href: "/subsale",
       icon: Home,
-      title: "Buy Property",
+      title: "Subsale Property",
       tagline: "Find your dream home in Johor",
       photo: photos.buy,
     },

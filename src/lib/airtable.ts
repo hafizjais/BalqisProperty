@@ -1,34 +1,18 @@
 import type { Listing } from "./types";
+import {
+  parseNum,
+  parseBool,
+  joinField,
+  toList,
+  attachmentUrls,
+  extractMapSrc,
+} from "./airtable-helpers";
 
 // Airtable Personal Access Token needs the data.records:read scope on this base.
 const PAT = process.env.AIRTABLE_PAT!;
 const BASE_ID = process.env.AIRTABLE_BASE_ID!;
 const TABLE_ID = process.env.AIRTABLE_TABLE_ID!;
 const BASE_URL = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`;
-
-// ---------------------------------------------------------------------------
-// Field helpers
-// ---------------------------------------------------------------------------
-const parseNum = (val: any): number | null => {
-  if (val === undefined || val === null || val === "") return null;
-  const num = Number(String(val).replace(/[,\s]/g, ""));
-  return isNaN(num) ? null : num;
-};
-
-const parseBool = (val: any): boolean => {
-  if (val === undefined || val === null) return false;
-  if (typeof val === "boolean") return val;
-  const str = String(val).trim().toLowerCase();
-  return str === "true" || str === "1" || str === "yes" || str === "checked";
-};
-
-// Airtable multi-select fields arrive as string[]; plain text fields as string.
-// Some fields (e.g. "status pemilikan") were migrated to multi-select, so this
-// normalises either shape into one display string ("Freehold, Tanah Kurnia").
-const joinField = (val: any): string => {
-  if (Array.isArray(val)) return val.filter(Boolean).join(", ");
-  return val ? String(val).trim() : "";
-};
 
 // The base has a known trailing-space duplicate on "status lot tanah" —
 // some rows carry the value under the space-suffixed key. Check both.
@@ -38,30 +22,6 @@ const anyKey = (f: Record<string, any>, ...names: string[]): any => {
   }
   return undefined;
 };
-
-// "area" was migrated to a multi-select — a listing can now cover more than
-// one area (e.g. "Pulai Mutiara" and "Tampoi"). Normalise either shape
-// (string[] or plain string) into a flat array for filtering/matching.
-const toList = (val: any): string[] => {
-  if (Array.isArray(val)) return val.map((v) => String(v).trim()).filter(Boolean);
-  return val ? [String(val).trim()] : [];
-};
-
-// images is an Airtable attachment field: [{ url, ... }, ...].
-// The first attachment is used as the card/hero cover photo.
-function attachmentUrls(val: any): string[] {
-  if (!Array.isArray(val)) return [];
-  return val.map((a) => a?.url).filter(Boolean);
-}
-
-// mapEmbedUrl may hold a full <iframe> snippet (pasted from Google Maps
-// "Embed a map") or a bare URL — extract just the src either way.
-function extractMapSrc(val: string): string {
-  if (!val) return "";
-  const m = val.match(/src\s*=\s*"([^"]+)"/) || val.match(/src\s*=\s*'([^']+)'/);
-  if (m) return m[1];
-  return val.startsWith("http") ? val.trim() : "";
-}
 
 // Turn one Airtable record into a Listing.
 // includeGallery controls whether the full `images` array is populated —

@@ -4,6 +4,9 @@ const styles: Record<string, string> = {
   "room-rent": "bg-warm-grey text-white",
   sold: "bg-slate-500 text-white",
   neutral: "bg-sand text-espresso",
+  "new launch": "bg-copper text-white",
+  "under construction": "bg-teal text-white",
+  "ready to move in": "bg-emerald-600 text-white",
 };
 
 export const listingTypeLabel: Record<string, string> = {

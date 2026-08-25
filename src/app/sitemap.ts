@@ -4,7 +4,8 @@ import { SITE_URL } from "@/lib/constants";
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
-    "/buy",
+    "/subsale",
+    "/project",
     "/commercial",
     "/commercial/shop-lot",
     "/commercial/land",

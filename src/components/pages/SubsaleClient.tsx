@@ -16,11 +16,11 @@ const config = {
   showTenure: true,
 };
 
-export default function BuyClient() {
+export default function SubsaleClient() {
   const { listings, loading, error } = useListings("sale");
   const [filters, setFilters] = useState(() => defaultFilters(100000, 5000000));
 
-  // Shop lots and land live under /commercial — Buy shows homes only
+  // Shop lots and land live under /commercial — Subsale shows homes only
   const filtered = useMemo(
     () => applyFilters(listings.filter((l) => !isCommercial(l)), filters),
     [listings, filters]
@@ -36,10 +36,10 @@ export default function BuyClient() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
       <Breadcrumb
-        items={[{ label: "Home", href: "/" }, { label: "Buy Property" }]}
+        items={[{ label: "Home", href: "/" }, { label: "Subsale Property" }]}
       />
       <h1 className="font-display text-3xl font-bold text-espresso md:text-4xl">
-        Properties For Sale in Johor Bahru
+        Subsale Properties in Johor Bahru
       </h1>
       <p className="mt-2 text-warm-grey">
         {loading ? "Loading listings…" : `${filtered.length} listings available`}

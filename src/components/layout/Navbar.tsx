@@ -8,7 +8,8 @@ import { waLink } from "@/lib/constants";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/buy", label: "Buy" },
+  { href: "/subsale", label: "Subsale" },
+  { href: "/project", label: "Project" },
   {
     href: "/commercial",
     label: "Commercial",

@@ -9,7 +9,8 @@ import {
 } from "@/lib/constants";
 
 const quickLinks = [
-  { href: "/buy", label: "Buy Property" },
+  { href: "/subsale", label: "Subsale Property" },
+  { href: "/project", label: "New Projects" },
   { href: "/commercial", label: "Commercial" },
   { href: "/commercial/shop-lot", label: "Shop Lot" },
   { href: "/commercial/land", label: "Land" },

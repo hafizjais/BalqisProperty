@@ -57,7 +57,7 @@ function categoryCrumb(listing: Parameters<typeof isLand>[0]) {
   if (isShopLot(listing) || listing.propertyType.toLowerCase() === "commercial") {
     return { label: "Shop Lot", href: "/commercial/shop-lot" };
   }
-  return { label: "Buy Property", href: "/buy" };
+  return { label: "Subsale Property", href: "/subsale" };
 }
 
 export default async function ListingDetailPage({ params }: Props) {

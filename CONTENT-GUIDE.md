@@ -95,7 +95,7 @@ These are based on current Malaysian regulations — only change the numbers if 
 
 Each page file has an `export const metadata = { title, description }` block near the top:
 - `src/app/page.tsx` (homepage)
-- `src/app/buy/page.tsx`, `src/app/commercial/page.tsx`, `.../shop-lot/page.tsx`, `.../land/page.tsx`
+- `src/app/subsale/page.tsx`, `src/app/commercial/page.tsx`, `.../shop-lot/page.tsx`, `.../land/page.tsx`
 - `src/app/about/page.tsx`, `src/app/contact/page.tsx`
 
 ## 🗺️ Sitemap
@@ -127,7 +127,32 @@ Each page file has an `export const metadata = { title, description }` block nea
 
 **Sorting:** listings appear oldest → newest by when the row was created in Airtable, so a brand-new row always lands at the bottom automatically — no extra step needed.
 
-**Categorization:** a listing lands under **Buy**, **Shop Lot**, or **Land** automatically based on words in `subType` (e.g. "Shop Lot", "Land" for those; anything else defaults to Buy). No manual category field to set.
+**Categorization:** a listing lands under **Subsale**, **Shop Lot**, or **Land** automatically based on words in `subType` (e.g. "Shop Lot", "Land" for those; anything else defaults to Subsale). No manual category field to set.
+
+---
+
+## 🏗️ New Project launches — a separate Airtable sheet
+
+**Sheet:** create a new table in the same base, e.g. "Projects". One row = one **unit type** within a project (e.g. "Emerald Residence — Type A"). Rows sharing the same `projectId` are grouped into one project page on the site — the project's shared info (name, developer, photos, description, facilities) only needs to be correct on one of its rows, but keeping it consistent across all of a project's rows is safest.
+
+| Field | What it controls |
+|---|---|
+| `id` | Unique identifier for this row — **required** |
+| `projectId` | Short code shared by every unit type in the same project, e.g. `EMR01` — **required**, this is what groups rows into one project card |
+| `projectName` | Project name shown as the page title |
+| `developer` | Shown as "by [developer]" |
+| `projectStage` | `New Launch`, `Under Construction`, or `Ready to Move In` — shown as a badge |
+| `tenure` | Freehold / Leasehold |
+| `typeName` | e.g. "Type A", "Type B" — one unit type per row |
+| `bedrooms`, `bathrooms`, `builtUpSqft` | Unit type specs |
+| `price` | Currency — the lowest `price` across a project's rows shows as "From RM X" on the project card |
+| `status` | `available` or `sold out` — per unit type |
+| `floorPlan` | Attachment — this unit type's floor plan image |
+| `images` | Attachment — project photo gallery (shared across all a project's rows) |
+| `description`, `amenities`, `area`, `city`, `state`, `address`, `mapEmbedUrl` | Project-level detail page content (same format as the listings table) |
+| `featured` | Checkbox — reserved for future use |
+
+**Where it appears:** the **Project** nav tab (`/project`) lists every project as a card ("From RM X", stage badge, area, number of unit types). Clicking a project opens `/project/[projectId]` with the full gallery, description, facilities, and every unit type as its own card with a dedicated WhatsApp inquiry button.
 
 ---
 
@@ -139,5 +164,6 @@ Each page file has an `export const metadata = { title, description }` block nea
 AIRTABLE_PAT=...
 AIRTABLE_BASE_ID=...
 AIRTABLE_TABLE_ID=...
+AIRTABLE_PROJECT_TABLE_ID=...
 ```
-Only touch this if you switch to a different Airtable base/table, or need to rotate the access token.
+`AIRTABLE_PROJECT_TABLE_ID` is the table id for the new Project sheet above (same base/PAT as the listings table). Only touch this block if you switch to a different Airtable base/table, add the project sheet, or need to rotate the access token.
