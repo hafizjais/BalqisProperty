@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { fetchProject } from "@/lib/airtable-projects";
 
+export const revalidate = 300;
+
 export async function GET(
   _req: Request,
   { params }: { params: { projectId: string } }

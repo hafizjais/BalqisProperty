@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { fetchListing } from "@/lib/airtable";
 
+export const revalidate = 300;
+
 export async function GET(
   _req: Request,
   { params }: { params: { id: string } }
