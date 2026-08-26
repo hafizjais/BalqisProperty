@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { fetchProject } from "@/lib/airtable-projects";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export async function GET(
   _req: Request,

@@ -88,9 +88,13 @@ async function fetchAllRecords(): Promise<any[]> {
     url.searchParams.set("pageSize", "100");
     if (offset) url.searchParams.set("offset", offset);
 
+    // Airtable's attachment URLs are short-lived and must come from a fresh
+    // API call each time — time-based revalidation (next.revalidate) was
+    // observed getting stuck on a stale cached response on Vercel, so this
+    // is fully dynamic instead.
     const res = await fetch(url.toString(), {
       headers: { Authorization: `Bearer ${PAT}` },
-      next: { revalidate: 300 }, // cache for 5 minutes, auto-refresh
+      cache: "no-store",
     });
 
     if (!res.ok) {
@@ -141,7 +145,7 @@ export async function fetchListing(id: string): Promise<Listing | null> {
 
   const res = await fetch(url.toString(), {
     headers: { Authorization: `Bearer ${PAT}` },
-    next: { revalidate: 300 },
+    cache: "no-store",
   });
 
   if (!res.ok) {

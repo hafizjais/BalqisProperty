@@ -8,7 +8,7 @@ import Gallery from "@/components/listing/Gallery";
 import ProjectTypeCard from "@/components/project/ProjectTypeCard";
 import { formatRM, waLink } from "@/lib/constants";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 type Props = { params: { projectId: string } };
 

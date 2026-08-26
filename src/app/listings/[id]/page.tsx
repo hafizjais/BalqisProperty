@@ -19,7 +19,7 @@ import Gallery from "@/components/listing/Gallery";
 import InquiryPanel from "@/components/listing/InquiryPanel";
 import MoreListings from "@/components/listing/MoreListings";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 type Props = { params: { id: string } };
 
