@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import CommercialClient from "@/components/pages/CommercialClient";
+import LandClient from "@/components/pages/LandClient";
 
 export const metadata: Metadata = {
   title: "Land For Sale in Johor",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function LandPage() {
-  return <CommercialClient category="land" />;
+  return <LandClient />;
 }

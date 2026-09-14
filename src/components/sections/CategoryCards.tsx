@@ -5,37 +5,31 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Home, Store, LandPlot, ArrowRight } from "lucide-react";
 
-export interface CategoryPhotos {
-  buy?: string;
-  shopLot?: string;
-  land?: string;
-}
-
 // The 3 category entry points — photo-backed cards overlapping the hero edge.
-// Categories with no listings yet (Shop Lot / Land) simply render without a
-// photo until real listings — and their cover images — exist in Airtable.
-export default function CategoryCards({ photos = {} }: { photos?: CategoryPhotos }) {
+// Photos are fixed brand images in /public rather than pulled from Airtable,
+// so these cards never change as listings come and go.
+export default function CategoryCards() {
   const categories = [
     {
       href: "/subsale",
       icon: Home,
       title: "Subsale Property",
       tagline: "Find your dream home in Johor",
-      photo: photos.buy,
+      photo: "/subsale_background.png",
     },
     {
       href: "/commercial/shop-lot",
       icon: Store,
       title: "Shop Lot",
       tagline: "Shops & premises for your business",
-      photo: photos.shopLot,
+      photo: "/shoplot_background.jpg",
     },
     {
       href: "/commercial/land",
       icon: LandPlot,
       title: "Land",
       tagline: "Lots & land for development",
-      photo: photos.land,
+      photo: "/Land_background.jpg",
     },
   ];
 

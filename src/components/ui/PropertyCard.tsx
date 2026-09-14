@@ -18,7 +18,15 @@ function inquiryMessage(listing: Listing): string {
   return `Hi Balqis, saya berminat dengan property ini: ${listing.title} di ${listing.area || "Johor Bahru"}. Boleh share more details?`;
 }
 
-export default function PropertyCard({ listing }: { listing: Listing }) {
+export default function PropertyCard({
+  listing,
+  hrefBase = "/listings",
+}: {
+  listing: Listing;
+  // Shop lot listings live in a separate table/detail route from Subsale —
+  // defaults to Subsale's route so existing callers are unaffected.
+  hrefBase?: string;
+}) {
   const available = (listing.status || "available").toLowerCase() === "available";
   const statusLabel = available
     ? null
@@ -33,7 +41,7 @@ export default function PropertyCard({ listing }: { listing: Listing }) {
     >
       {/* Stretched link keeps the WhatsApp button as a separate tap target */}
       <Link
-        href={`/listings/${listing.id}`}
+        href={`${hrefBase}/${listing.id}`}
         className="absolute inset-0 z-[1]"
         aria-label={listing.title}
       />

@@ -6,7 +6,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/subsale",
     "/project",
-    "/commercial",
     "/commercial/shop-lot",
     "/commercial/land",
     "/about",

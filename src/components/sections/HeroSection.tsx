@@ -3,43 +3,34 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { MessageCircle, ArrowRight, Send, Phone, Mail, MapPin } from "lucide-react";
+import { MessageCircle, ArrowRight, Send, Phone, Mail } from "lucide-react";
 import Button from "@/components/ui/Button";
 import {
   waLink,
   TELEGRAM_URL,
-  AGENT_NAME,
   AGENCY_NAME,
   AGENCY_REG_NO,
-  AGENT_TITLE,
-  AGENCY_PHONES,
-  AGENCY_EMAILS,
-  AGENCY_ADDRESS,
+  AGENCY_PHONE,
+  AGENCY_EMAIL,
 } from "@/lib/constants";
 
 // Immersive full-bleed hero: edge-to-edge photography with an optional
 // looping video backdrop — drop a file at public/hero-video.mp4 to enable it.
-export default function HeroSection({
-  backgroundImage,
-}: {
-  backgroundImage?: string;
-}) {
+export default function HeroSection() {
   const [videoOk, setVideoOk] = useState(true);
 
   return (
     <section className="relative flex min-h-[92vh] items-end overflow-hidden bg-ink">
-      {/* Edge-to-edge backdrop — a real listing photo when one is available */}
-      {backgroundImage && (
-        <Image
-          src={backgroundImage}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-50"
-          aria-hidden
-        />
-      )}
+      {/* Edge-to-edge backdrop — fixed brand image, not pulled from Airtable */}
+      <Image
+        src="/Cover Page_background.jpeg"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover opacity-50"
+        aria-hidden
+      />
       {videoOk && (
         <video
           autoPlay
@@ -69,31 +60,19 @@ export default function HeroSection({
           <h1 className="mt-4 font-display text-4xl font-bold leading-tight text-cream sm:text-6xl">
             Your Trusted Property Partner in Johor Bahru
           </h1>
-          <p className="mt-4 max-w-xl text-lg text-cream/85">
-            Nurul Balqis · Houses, shop lots &amp; land for sale across Johor
-            and the greater Iskandar Malaysia region
-          </p>
-
           {/* Agency details — from Nurul Balqis's business card */}
           <div className="mt-6 max-w-xl rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
             <p className="font-display text-base font-bold text-cream">
               {AGENCY_NAME} <span className="text-copper">{AGENCY_REG_NO}</span>
             </p>
-            <p className="mt-0.5 text-sm text-cream/80">
-              {AGENT_NAME} · {AGENT_TITLE}
-            </p>
             <div className="mt-3 space-y-1.5 text-sm text-cream/85">
               <p className="flex items-center gap-2">
                 <Phone className="h-3.5 w-3.5 shrink-0 text-copper" aria-hidden />
-                {AGENCY_PHONES.join(" · ")}
+                {AGENCY_PHONE}
               </p>
               <p className="flex items-center gap-2">
                 <Mail className="h-3.5 w-3.5 shrink-0 text-copper" aria-hidden />
-                {AGENCY_EMAILS.join(" · ")}
-              </p>
-              <p className="flex items-start gap-2">
-                <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-copper" aria-hidden />
-                {AGENCY_ADDRESS}
+                {AGENCY_EMAIL}
               </p>
             </div>
           </div>
@@ -144,7 +123,7 @@ export default function HeroSection({
             />
             <div className="relative h-full w-full overflow-hidden rounded-full border-4 border-copper shadow-card-hover">
               <Image
-                src="/agent-balqis.png"
+                src="/Balqis.png"
                 alt="Nurul Balqis, property agent in Johor Bahru"
                 fill
                 priority

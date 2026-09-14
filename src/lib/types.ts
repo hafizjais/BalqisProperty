@@ -71,3 +71,28 @@ export interface Project {
   postedDate: string;
   types: ProjectUnitType[];
 }
+
+// One row in the "Land" Airtable sheet = one land listing. Field names are
+// land-specific and don't overlap with the main Listing schema.
+export interface LandListing {
+  id: string;
+  title: string;
+  category: string; // "Tanah Pertanian" (agricultural), "Tanah Pembangunan" (development) ...
+  lotStatus: string; // "International Lot" | "Non Bumi Lot" | "Rezab Melayu" ...
+  ownership: string; // "Freehold" | "Leasehold" (can be more than one, so this is a joined display string)
+  rezabTanah: string; // reserve-land status, only set on some rows
+  status: string; // "available" | "sold" ...
+  mukim: string; // Malaysian sub-district, only set on some rows
+  area: string;
+  areas: string[];
+  city: string;
+  acres: number | null; // land_area_acres — set on agricultural-category rows
+  buildUpSqft: number | null; // buildup_sqft — set on development-category rows
+  marketValue: number; // 0 = "Price on Request", same convention as Listing.price
+  featured: boolean;
+  coverImage: string;
+  images: string[];
+  description: string;
+  postedDate: string;
+  mapEmbedUrl: string;
+}

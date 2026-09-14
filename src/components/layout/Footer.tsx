@@ -11,7 +11,6 @@ import {
 const quickLinks = [
   { href: "/subsale", label: "Subsale Property" },
   { href: "/project", label: "New Projects" },
-  { href: "/commercial", label: "Commercial" },
   { href: "/commercial/shop-lot", label: "Shop Lot" },
   { href: "/commercial/land", label: "Land" },
   { href: "/about", label: "About Balqis" },

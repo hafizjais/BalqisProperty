@@ -1,26 +1,12 @@
 "use client";
 
-import { useState, useMemo } from "react";
 import Link from "next/link";
-import { useListings } from "@/hooks/useListings";
-import {
-  applyFilters,
-  defaultFilters,
-  isCommercial,
-  isShopLot,
-  isLand,
-} from "@/lib/filters";
+import { ArrowRight } from "lucide-react";
+import { useShoplots } from "@/hooks/useShoplots";
+import { useLand } from "@/hooks/useLand";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import FilterBar from "@/components/sections/FilterBar";
 import ListingsResults from "@/components/sections/ListingsResults";
-
-type Category = "all" | "shop-lot" | "land";
-
-const meta: Record<Category, { title: string; crumb: string | null }> = {
-  all: { title: "Commercial Properties in Johor", crumb: null },
-  "shop-lot": { title: "Shop Lots For Sale in Johor", crumb: "Shop Lot" },
-  land: { title: "Land For Sale in Johor", crumb: "Land" },
-};
+import LandResults from "@/components/sections/LandResults";
 
 const subNav = [
   { href: "/commercial", label: "All Commercial", key: "all" },
@@ -28,72 +14,28 @@ const subNav = [
   { href: "/commercial/land", label: "Land", key: "land" },
 ];
 
-export default function CommercialClient({
-  category = "all",
-}: {
-  category?: Category;
-}) {
-  const { listings, loading, error } = useListings();
-  const [filters, setFilters] = useState(() => defaultFilters(0, 5000000));
-
-  const config = {
-    priceMin: 0,
-    priceMax: 5000000,
-    priceStep: 50000,
-    propertyTypes:
-      category === "all" ? ["Shop Lot", "Office", "Industrial", "Land"] : undefined,
-  };
-
-  const commercial = useMemo(
-    () =>
-      listings.filter((l) =>
-        category === "shop-lot"
-          ? isShopLot(l)
-          : category === "land"
-            ? isLand(l)
-            : isCommercial(l)
-      ),
-    [listings, category]
-  );
-
-  const filtered = useMemo(
-    () => applyFilters(commercial, filters),
-    [commercial, filters]
-  );
-
-  // Every area currently in use across commercial listings — a new area
-  // added in Airtable shows up in the filter automatically.
-  const areaOptions = useMemo(
-    () => Array.from(new Set(commercial.flatMap((l) => l.areas))).sort(),
-    [commercial]
-  );
-
-  const crumbs = [
-    { label: "Home", href: "/" },
-    meta[category].crumb
-      ? { label: "Commercial", href: "/commercial" }
-      : { label: "Commercial" },
-    ...(meta[category].crumb ? [{ label: meta[category].crumb! }] : []),
-  ];
+// Shop lots and land live in separate Airtable tables with different
+// schemas, so this overview shows a preview of each rather than one
+// unified grid — "View all" links to their dedicated, filterable pages.
+export default function CommercialClient() {
+  const { shoplots, loading: shoplotsLoading, error: shoplotsError } = useShoplots();
+  const { land, loading: landLoading, error: landError } = useLand();
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <Breadcrumb items={crumbs} />
+      <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Commercial" }]} />
       <h1 className="font-display text-3xl font-bold text-espresso md:text-4xl">
-        {meta[category].title}
+        Commercial Properties in Johor
       </h1>
-      <p className="mt-2 text-warm-grey">
-        {loading ? "Loading listings…" : `${filtered.length} properties available`}
-      </p>
+      <p className="mt-2 text-warm-grey">Shop lots and land across Johor Bahru and Johor.</p>
 
-      {/* Category sub-navigation */}
       <div className="mt-4 flex flex-wrap gap-2">
         {subNav.map((tab) => (
           <Link
             key={tab.key}
             href={tab.href}
             className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
-              category === tab.key
+              tab.key === "all"
                 ? "bg-teal text-white"
                 : "border border-teal/40 text-teal hover:bg-teal hover:text-white"
             }`}
@@ -103,18 +45,42 @@ export default function CommercialClient({
         ))}
       </div>
 
-      <div className="mt-6">
-        <FilterBar
-          filters={filters}
-          onChange={setFilters}
-          config={config}
-          areaOptions={areaOptions}
-        />
-      </div>
+      <section className="mt-10">
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="font-display text-2xl font-bold text-espresso">Shop Lots</h2>
+          <Link
+            href="/commercial/shop-lot"
+            className="flex items-center gap-1 text-sm font-semibold text-teal hover:underline"
+          >
+            View all
+            <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+        </div>
+        <div className="mt-5">
+          <ListingsResults
+            listings={shoplots.slice(0, 3)}
+            loading={shoplotsLoading}
+            error={shoplotsError}
+            hrefBase="/commercial/shop-lot"
+          />
+        </div>
+      </section>
 
-      <div className="mt-8">
-        <ListingsResults listings={filtered} loading={loading} error={error} />
-      </div>
+      <section className="mt-12">
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="font-display text-2xl font-bold text-espresso">Land</h2>
+          <Link
+            href="/commercial/land"
+            className="flex items-center gap-1 text-sm font-semibold text-teal hover:underline"
+          >
+            View all
+            <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+        </div>
+        <div className="mt-5">
+          <LandResults land={land.slice(0, 3)} loading={landLoading} error={landError} />
+        </div>
+      </section>
     </div>
   );
 }

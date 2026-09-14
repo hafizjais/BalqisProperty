@@ -32,18 +32,13 @@ const whyJB = [
 ];
 
 export default async function HomePage() {
-  // Hero backdrop and category card photo pull from real Airtable listings —
-  // Shop Lot / Land have no listings yet, so those cards render without a
-  // photo until properties (and their cover images) are added.
   const listings = await fetchAllListings().catch(() => []);
-  const featuredWithPhoto = listings.find((l) => l.featured && l.coverImage);
-  const heroImage = featuredWithPhoto?.coverImage || listings.find((l) => l.coverImage)?.coverImage;
 
   return (
     <>
-      <HeroSection backgroundImage={heroImage} />
+      <HeroSection />
       {/* Category cards overlap the hero's bottom edge */}
-      <CategoryCards photos={{ buy: heroImage }} />
+      <CategoryCards />
 
       {/* Why Johor Bahru? */}
       <section className="bg-cream py-16">

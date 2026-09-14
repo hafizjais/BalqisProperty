@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import CommercialClient from "@/components/pages/CommercialClient";
+import ShopLotClient from "@/components/pages/ShopLotClient";
 
 export const metadata: Metadata = {
   title: "Shop Lots For Sale in Johor",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function ShopLotPage() {
-  return <CommercialClient category="shop-lot" />;
+  return <ShopLotClient />;
 }

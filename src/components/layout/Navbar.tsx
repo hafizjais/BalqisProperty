@@ -3,21 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, MessageCircle, ChevronDown } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
 import { waLink } from "@/lib/constants";
 
 const links = [
   { href: "/", label: "Home" },
   { href: "/subsale", label: "Subsale" },
   { href: "/project", label: "Project" },
-  {
-    href: "/commercial",
-    label: "Commercial",
-    children: [
-      { href: "/commercial/shop-lot", label: "Shop Lot" },
-      { href: "/commercial/land", label: "Land" },
-    ],
-  },
+  { href: "/commercial/shop-lot", label: "Shop Lot" },
+  { href: "/commercial/land", label: "Land" },
   { href: "/calculator", label: "Calculator" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
@@ -27,10 +21,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  const isActive = (link: (typeof links)[number]) =>
-    link.children
-      ? pathname.startsWith(link.href)
-      : pathname === link.href;
+  const isActive = (link: (typeof links)[number]) => pathname === link.href;
 
   return (
     <header className="sticky top-0 z-40 bg-mocha text-white shadow-md">
@@ -41,7 +32,7 @@ export default function Navbar() {
 
         <ul className="hidden items-center gap-6 lg:flex">
           {links.map((link) => (
-            <li key={link.href} className="group relative">
+            <li key={link.href}>
               <Link
                 href={link.href}
                 className={`flex items-center gap-1 border-b-2 pb-1 text-sm transition-colors hover:text-white ${
@@ -51,35 +42,7 @@ export default function Navbar() {
                 }`}
               >
                 {link.label}
-                {link.children && (
-                  <ChevronDown
-                    className="h-3.5 w-3.5 transition-transform group-hover:rotate-180"
-                    aria-hidden
-                  />
-                )}
               </Link>
-
-              {/* Hover dropdown */}
-              {link.children && (
-                <div className="invisible absolute left-0 top-full pt-3 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                  <ul className="min-w-44 overflow-hidden rounded-xl border border-white/10 bg-mocha shadow-card-hover">
-                    {link.children.map((child) => (
-                      <li key={child.href}>
-                        <Link
-                          href={child.href}
-                          className={`block px-4 py-3 text-sm transition-colors hover:bg-white/10 ${
-                            pathname === child.href
-                              ? "font-semibold text-copper"
-                              : "text-white/90"
-                          }`}
-                        >
-                          {child.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
             </li>
           ))}
         </ul>
@@ -122,25 +85,6 @@ export default function Navbar() {
                 >
                   {link.label}
                 </Link>
-                {link.children && (
-                  <ul className="ml-4 border-l border-white/15 pl-2">
-                    {link.children.map((child) => (
-                      <li key={child.href}>
-                        <Link
-                          href={child.href}
-                          onClick={() => setOpen(false)}
-                          className={`block rounded-lg px-3 py-2 text-sm ${
-                            pathname === child.href
-                              ? "font-semibold text-copper"
-                              : "text-white/75 hover:bg-white/5"
-                          }`}
-                        >
-                          {child.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
               </li>
             ))}
             <li className="pt-2">

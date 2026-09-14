@@ -45,3 +45,42 @@ export function extractMapSrc(val: string): string {
   if (m) return m[1];
   return val.startsWith("http") ? val.trim() : "";
 }
+
+// Escape a value for safe use inside an Airtable filterByFormula string literal
+export function escapeFormulaValue(value: string): string {
+  return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+}
+
+// Paginated fetch of every record in an Airtable table. Always fully
+// dynamic (cache: "no-store") — Airtable's attachment URLs are short-lived
+// and must come from a fresh API call every time; time-based revalidation
+// was previously found to get stuck serving hours-stale responses.
+export async function fetchAllAirtableRecords(
+  baseUrl: string,
+  pat: string
+): Promise<any[]> {
+  let allRecords: any[] = [];
+  let offset: string | null = null;
+
+  do {
+    const url = new URL(baseUrl);
+    url.searchParams.set("pageSize", "100");
+    if (offset) url.searchParams.set("offset", offset);
+
+    const res = await fetch(url.toString(), {
+      headers: { Authorization: `Bearer ${pat}` },
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(`Airtable fetch failed (${res.status}): ${body.slice(0, 200)}`);
+    }
+
+    const data = await res.json();
+    allRecords = [...allRecords, ...(data.records || [])];
+    offset = data.offset || null;
+  } while (offset);
+
+  return allRecords;
+}

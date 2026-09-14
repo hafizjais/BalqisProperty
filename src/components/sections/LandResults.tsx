@@ -1,35 +1,31 @@
 "use client";
 
-import type { Listing } from "@/lib/types";
-import PropertyCard from "@/components/ui/PropertyCard";
+import type { LandListing } from "@/lib/types";
+import LandCard from "@/components/ui/LandCard";
 import SkeletonCard from "@/components/ui/SkeletonCard";
 import EmptyState from "@/components/ui/EmptyState";
 import ErrorBanner from "@/components/ui/ErrorBanner";
 
-export default function ListingsResults({
-  listings,
+export default function LandResults({
+  land,
   loading,
   error,
   columns = "sm:grid-cols-2 xl:grid-cols-3",
-  hrefBase,
 }: {
-  listings: Listing[];
+  land: LandListing[];
   loading: boolean;
   error: string | null;
   columns?: string;
-  hrefBase?: string;
 }) {
   return (
     <div className={`grid grid-cols-1 gap-6 ${columns}`}>
       {loading &&
         Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)}
       {!loading && error && <ErrorBanner />}
-      {!loading && !error && listings.length === 0 && <EmptyState />}
+      {!loading && !error && land.length === 0 && <EmptyState />}
       {!loading &&
         !error &&
-        listings.map((listing) => (
-          <PropertyCard key={listing.id} listing={listing} hrefBase={hrefBase} />
-        ))}
+        land.map((l) => <LandCard key={l.id} land={l} />)}
     </div>
   );
 }

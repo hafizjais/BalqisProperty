@@ -10,11 +10,8 @@ export const SITE_URL = "https://balqismjproperty.vercel.app";
 // homepage hero for buyer/seller trust and compliance.
 export const AGENCY_NAME = "OD Legacy Realty Sdn. Bhd.";
 export const AGENCY_REG_NO = "E (1) 2004/1";
-export const AGENT_TITLE = "Business Development";
-export const AGENCY_PHONES = ["(+607) 231 5530", "(+6018) 265 6367"];
-export const AGENCY_EMAILS = ["onedream.mns@gmail.com", "balqismjproperty@gmail.com"];
-export const AGENCY_ADDRESS =
-  "S-17-03 & S-18-03, Pusat Komersil Visi Medini, Persiaran Medini 2, Bandar Medini Iskandar Puteri, Johor Darul Takzim";
+export const AGENCY_PHONE = "+6018 265 6367";
+export const AGENCY_EMAIL = "balqismjproperty@gmail.com";
 
 export const JB_AREAS = [
   "Iskandar Puteri",

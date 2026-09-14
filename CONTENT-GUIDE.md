@@ -12,7 +12,7 @@ A quick reference for updating the site yourself. Paths are relative to the proj
 
 | What | File |
 |---|---|
-| The actual photo | `public/agent-balqis.png` — replace this file (keep the same filename) |
+| The actual photo | `public/Balqis.png` — replace this file (keep the same filename) |
 | Where it's used | Automatically appears on the homepage hero and the About page — no code change needed once you swap the file |
 
 ## 📞 Contact info (WhatsApp, Telegram, Instagram)
@@ -127,7 +127,39 @@ Each page file has an `export const metadata = { title, description }` block nea
 
 **Sorting:** listings appear oldest → newest by when the row was created in Airtable, so a brand-new row always lands at the bottom automatically — no extra step needed.
 
-**Categorization:** a listing lands under **Subsale**, **Shop Lot**, or **Land** automatically based on words in `subType` (e.g. "Shop Lot", "Land" for those; anything else defaults to Subsale). No manual category field to set.
+**Categorization:** this table is for **Subsale** listings only — Shop Lot and Land now live in their own dedicated sheets below.
+
+---
+
+## 🏬 Shop Lot listings — a separate Airtable sheet
+
+**Sheet:** a separate table in the same base, same column layout as the main listings table above (`id`, `title`, `price`, `subType`, `status`, `area`, `city`, `address`, `landSqft`, `builtUpSqft`, `images`, `description`, `mapEmbedUrl`, `listingType`, `featured`). Fill it in exactly the same way — no new fields to learn.
+
+**Where it appears:** the **Shop Lot** tab under Commercial (`/commercial/shop-lot`), and a 3-card preview on the Commercial overview page (`/commercial`).
+
+---
+
+## 🌾 Land listings — a separate Airtable sheet
+
+**Sheet:** a separate table in the same base (the "Land" sheet). One row = one land listing.
+
+| Field | What it controls |
+|---|---|
+| `land_id` | Unique identifier — **required** for a listing to appear at all |
+| `land_title` | Shown as the title everywhere |
+| `land_category` | e.g. "Tanah Pertanian" (agricultural), "Tanah Pembangunan" (development) — shown as a badge |
+| `land_lot_status` | e.g. "International Lot", "Non Bumi Lot", "Rezab Melayu" — shown as a badge |
+| `ownership_status` | "Freehold" / "Leasehold" — shown as a badge |
+| `rezab_tanah` | Reserve-land status, only fill in when it applies — shown as a badge |
+| `mukim` | Malaysian sub-district, optional — shown as a badge when filled in |
+| `property_status` | `available` or `sold` |
+| `area_name`, `city` | Location |
+| `land_area_acres` | The land's total acreage (a plain number, e.g. `5.24`) |
+| `buildup_sqft` | Buildable floor area in sqft, if relevant — both this and acreage show together on the card/detail page whenever you've filled in both |
+| `market_value` | Currency — shown as the price, same "Price on Request" fallback as the listings table when left blank |
+| `mapEmbedUrl`, `images`, `description`, `featured` | Same format as the listings table |
+
+**Where it appears:** the **Land** tab under Commercial (`/commercial/land`), and a 3-card preview on the Commercial overview page (`/commercial`).
 
 ---
 
@@ -169,5 +201,7 @@ AIRTABLE_PAT=...
 AIRTABLE_BASE_ID=...
 AIRTABLE_TABLE_ID=...
 AIRTABLE_PROJECT_TABLE_ID=...
+AIRTABLE_SHOPLOT_TABLE_ID=...
+AIRTABLE_LAND_TABLE_ID=...
 ```
-`AIRTABLE_PROJECT_TABLE_ID` is the table id for the new Project sheet above (same base/PAT as the listings table). Only touch this block if you switch to a different Airtable base/table, add the project sheet, or need to rotate the access token.
+Each `_TABLE_ID` variable is the table id for its matching sheet above (all in the same base, using the same PAT). Only touch this block if you switch to a different Airtable base/table, add another sheet, or need to rotate the access token.

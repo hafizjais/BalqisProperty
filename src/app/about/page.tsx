@@ -8,16 +8,10 @@ import { JB_AREAS, INSTAGRAM_URL, waLink } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "About Nurul Balqis",
   description:
-    "Meet Nurul Balqis of BalqisMJ Property — property agent specializing in Johor Bahru and the greater Iskandar Malaysia region.",
+    "Meet Nurul Balqis, property agent specializing in Johor Bahru and the greater Iskandar Malaysia region.",
 };
 
 const propertyTypes = ["Residential", "Commercial", "Land"];
-
-const stats = [
-  { value: "8", label: "Transactions" },
-  { value: "3", label: "Months Experience" },
-  { value: `${JB_AREAS.length}`, label: "Areas Covered" },
-];
 
 export default function AboutPage() {
   return (
@@ -28,7 +22,7 @@ export default function AboutPage() {
       <div className="grid items-start gap-10 lg:grid-cols-2">
         <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl shadow-card">
           <Image
-            src="/agent-balqis.png"
+            src="/Balqis.png"
             alt="Nurul Balqis, property agent specializing in Johor Bahru and the greater Iskandar Malaysia region."
             fill
             priority
@@ -39,30 +33,17 @@ export default function AboutPage() {
 
         <div>
           <h1 className="font-display text-4xl font-bold text-espresso">
-            Nurul Balqis
+            Nurul Balqis Binti Mohd Jais
           </h1>
-          {/* TODO: add REN number once available */}
           <p className="mt-2 text-warm-grey">
-            Licensed Real Estate Agent | REN _______
+            Property agent specializing in Johor Bahru and the greater Iskandar Malaysia region
           </p>
 
           <p className="mt-6 text-lg leading-relaxed text-espresso/90">
-            &ldquo;With 3 months of experience in the Johor Bahru property
-            market, I specialise in helping clients find the right home
-            whether buying, selling, or renting. My focus is always on Johor
-            Bahru and the greater Iskandar Malaysia region.&rdquo;
+            &ldquo;I specialise in properties across Johor Bahru, helping clients buy, sell, and rent with confidence.
+            My focus is understanding your needs and finding the right property for you.\n\n
+            Send me a message with your preferred location and budget, and I’ll help you explore the right options.&rdquo;
           </p>
-
-          <div className="mt-8 flex divide-x divide-peach rounded-2xl border border-peach bg-graphite py-4 shadow-card">
-            {stats.map((s) => (
-              <div key={s.label} className="flex-1 px-4 text-center">
-                <p className="font-display text-2xl font-bold text-copper">
-                  {s.value}
-                </p>
-                <p className="mt-1 text-xs text-warm-grey">{s.label}</p>
-              </div>
-            ))}
-          </div>
 
           <h2 className="mt-8 text-sm font-semibold uppercase tracking-wider text-warm-grey">
             Property types I handle
