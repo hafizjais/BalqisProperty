@@ -33,7 +33,7 @@ export default function AboutPage() {
 
         <div>
           <h1 className="font-display text-4xl font-bold text-espresso">
-            Nurul Balqis Binti Mohd Jais
+            Nurul Balqis binti Mohd Jais
           </h1>
           <p className="mt-2 text-warm-grey">
             Property agent specializing in Johor Bahru and the greater Iskandar Malaysia region
@@ -41,7 +41,7 @@ export default function AboutPage() {
 
           <p className="mt-6 text-lg leading-relaxed text-espresso/90">
             &ldquo;I specialise in properties across Johor Bahru, helping clients buy, sell, and rent with confidence.
-            My focus is understanding your needs and finding the right property for you.\n\n
+            My focus is understanding your needs and finding the right property for you.
             Send me a message with your preferred location and budget, and I’ll help you explore the right options.&rdquo;
           </p>
 

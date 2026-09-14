@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import ShopLotClient from "@/components/pages/ShopLotClient";
 
 export const metadata: Metadata = {
-  title: "Shop Lots For Sale in Johor",
+  title: "Shoplots For Rent/Sale in Johor",
   description:
-    "Shop lots, offices and business premises for sale across Johor Bahru and Johor. BalqisMJ Property.",
+    "Shoplots, offices and business premises for sale across Johor Bahru and Johor. Balqis Property.",
 };
 
 export default function ShopLotPage() {

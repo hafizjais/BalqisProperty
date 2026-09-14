@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, MessageCircle } from "lucide-react";
@@ -26,7 +27,15 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 bg-mocha text-white shadow-md">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="font-display text-xl font-bold tracking-wide">
+        <Link href="/" className="flex items-center gap-2 font-display text-xl font-bold tracking-wide">
+          <Image
+            src="/logo_property.png"
+            alt=""
+            width={36}
+            height={36}
+            className="h-9 w-9 shrink-0 rounded-full object-cover"
+            aria-hidden
+          />
           BalqisMJ <span className="text-copper">Property</span>
         </Link>
 
