@@ -3,15 +3,19 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { MessageCircle, ArrowRight, Send } from "lucide-react";
+import { MessageCircle, ArrowRight, Send, Phone, Mail, MapPin } from "lucide-react";
 import Button from "@/components/ui/Button";
-import { waLink, TELEGRAM_URL } from "@/lib/constants";
-
-const stats = [
-  { value: "8", label: "Transactions" },
-  { value: "3+", label: "Months Experience" },
-  { value: "JB", label: "Specialist" },
-];
+import {
+  waLink,
+  TELEGRAM_URL,
+  AGENT_NAME,
+  AGENCY_NAME,
+  AGENCY_REG_NO,
+  AGENT_TITLE,
+  AGENCY_PHONES,
+  AGENCY_EMAILS,
+  AGENCY_ADDRESS,
+} from "@/lib/constants";
 
 // Immersive full-bleed hero: edge-to-edge photography with an optional
 // looping video backdrop — drop a file at public/hero-video.mp4 to enable it.
@@ -70,7 +74,31 @@ export default function HeroSection({
             and the greater Iskandar Malaysia region
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          {/* Agency details — from Nurul Balqis's business card */}
+          <div className="mt-6 max-w-xl rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
+            <p className="font-display text-base font-bold text-cream">
+              {AGENCY_NAME} <span className="text-copper">{AGENCY_REG_NO}</span>
+            </p>
+            <p className="mt-0.5 text-sm text-cream/80">
+              {AGENT_NAME} · {AGENT_TITLE}
+            </p>
+            <div className="mt-3 space-y-1.5 text-sm text-cream/85">
+              <p className="flex items-center gap-2">
+                <Phone className="h-3.5 w-3.5 shrink-0 text-copper" aria-hidden />
+                {AGENCY_PHONES.join(" · ")}
+              </p>
+              <p className="flex items-center gap-2">
+                <Mail className="h-3.5 w-3.5 shrink-0 text-copper" aria-hidden />
+                {AGENCY_EMAILS.join(" · ")}
+              </p>
+              <p className="flex items-start gap-2">
+                <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-copper" aria-hidden />
+                {AGENCY_ADDRESS}
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <Button variant="primary" size="lg" href="/subsale">
               Browse All Listings
               <ArrowRight className="h-5 w-5" aria-hidden />
@@ -87,20 +115,6 @@ export default function HeroSection({
               <Send className="h-5 w-5" aria-hidden />
               Telegram
             </Button>
-          </div>
-
-          {/* Overlapping glass stats panel */}
-          <div className="mt-10 flex max-w-md divide-x divide-white/10 rounded-2xl border border-white/10 bg-white/5 py-3 backdrop-blur-md">
-            {stats.map((s) => (
-              <div key={s.label} className="flex-1 px-3 text-center">
-                <p className="font-display text-xl font-bold text-copper">
-                  {s.value}
-                </p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-cream/75">
-                  {s.label}
-                </p>
-              </div>
-            ))}
           </div>
         </motion.div>
 

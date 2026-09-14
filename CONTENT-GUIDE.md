@@ -33,7 +33,7 @@ Change these once here and every WhatsApp button, Telegram button, and Instagram
 | Color values (hex codes) | `tailwind.config.ts` — look for `espresso`, `mocha`, `copper`, `sand`, `cream`, `warm-grey`, `graphite`, `ink`, `truffle` |
 | Same values again (CSS variables) | `src/app/globals.css` — must match `tailwind.config.ts` |
 
-Current palette: teal `#01757A` (primary/nav), orange `#E57734` (CTAs/badges), cream `#F8EBCF` (backgrounds), deep brown `#3E2922` (text/footer), peach `#F6C0A6` (borders), taupe (secondary text).
+Current palette: teal `#01757A` (primary/nav), orange `#E57734` (CTAs/badges), white `#FFFFFF` (backgrounds, named `cream` in the code), deep brown `#3E2922` (text/footer), peach `#F6C0A6` (borders), taupe (secondary text).
 
 ## 🔤 Fonts
 

@@ -15,7 +15,7 @@ const config: Config = {
         teal: "#01757A", // teal — primary buttons, active states
         copper: "#E57734", // orange — CTAs, prices, badges, highlights
         sand: "#F3DCC0", // soft cream-peach — chips, tracks, alt sections
-        cream: "#F8EBCF", // cream — page & section backgrounds
+        cream: "#FFFFFF", // white — page & section backgrounds
         "warm-grey": "#7D6F65", // darkened taupe — secondary text (readable)
         taupe: "#B6ACAD", // muted taupe — borders, placeholders
         peach: "#F6C0A6", // soft peach — card borders, hover accents
