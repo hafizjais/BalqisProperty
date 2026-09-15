@@ -23,8 +23,9 @@ A quick reference for updating the site yourself. Paths are relative to the proj
 export const WHATSAPP_NUMBER = "60182656367";
 export const INSTAGRAM_HANDLE = "balqismjproperty";
 export const TELEGRAM_URL = "https://t.me/balqismjrental";
+export const TELEGRAM_SUBSALE_URL = "https://t.me/balqismjsubsale";
 ```
-Change these once here and every WhatsApp button, Telegram button, and Instagram link across the whole site updates automatically.
+Change these once here and every WhatsApp button, Telegram button, and Instagram link across the whole site updates automatically. The homepage hero has two Telegram buttons — "Rental" (`TELEGRAM_URL`) and "Subsale & Land" (`TELEGRAM_SUBSALE_URL`).
 
 ## 🎨 Colors / theme
 

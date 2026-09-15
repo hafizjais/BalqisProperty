@@ -8,6 +8,7 @@ import Button from "@/components/ui/Button";
 import {
   waLink,
   TELEGRAM_URL,
+  TELEGRAM_SUBSALE_URL,
   AGENCY_NAME,
   AGENCY_REG_NO,
   AGENCY_PHONE,
@@ -23,7 +24,7 @@ export default function HeroSection() {
     <section className="relative flex min-h-[92vh] items-end overflow-hidden bg-ink">
       {/* Edge-to-edge backdrop — fixed brand image, not pulled from Airtable */}
       <Image
-        src="/Cover Page_background.jpeg"
+        src="/Team_background.jpg"
         alt=""
         fill
         priority
@@ -90,10 +91,17 @@ export default function HeroSection() {
               <MessageCircle className="h-5 w-5" aria-hidden />
               WhatsApp Me
             </Button>
-            <Button variant="telegram" size="lg" href={TELEGRAM_URL}>
-              <Send className="h-5 w-5" aria-hidden />
-              Telegram
-            </Button>
+            {/* Two Telegram channels — grouped tighter together as a pair */}
+            <div className="flex gap-2">
+              <Button variant="telegram" size="lg" href={TELEGRAM_URL}>
+                <Send className="h-5 w-5" aria-hidden />
+                Rental
+              </Button>
+              <Button variant="telegram" size="lg" href={TELEGRAM_SUBSALE_URL}>
+                <Send className="h-5 w-5" aria-hidden />
+                Subsale &amp; Land
+              </Button>
+            </div>
           </div>
         </motion.div>
 

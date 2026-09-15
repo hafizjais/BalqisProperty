@@ -3,9 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Home, Store, LandPlot, ArrowRight } from "lucide-react";
+import { Home, Building2, Store, LandPlot, ArrowRight } from "lucide-react";
 
-// The 3 category entry points — photo-backed cards overlapping the hero edge.
+// The 4 category entry points — photo-backed cards overlapping the hero edge.
 // Photos are fixed brand images in /public rather than pulled from Airtable,
 // so these cards never change as listings come and go.
 export default function CategoryCards() {
@@ -16,6 +16,13 @@ export default function CategoryCards() {
       title: "Subsale Property",
       tagline: "Find your dream home in Johor",
       photo: "/subsale_background.png",
+    },
+    {
+      href: "/project",
+      icon: Building2,
+      title: "Project Property",
+      tagline: "New developer launches in Johor",
+      photo: "/project_background.jpg",
     },
     {
       href: "/commercial/shop-lot",
@@ -36,7 +43,7 @@ export default function CategoryCards() {
   return (
     <section className="relative z-10 -mt-24 pb-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.href}
