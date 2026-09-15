@@ -58,15 +58,15 @@ export default function HeroSection() {
           <p className="text-sm font-bold uppercase tracking-[0.3em] text-copper sm:text-base">
             BalqisMJ Property · Johor Bahru
           </p>
-          <h1 className="mt-4 font-display text-4xl font-bold leading-tight text-cream sm:text-6xl">
+          <h1 className="mt-6 font-display text-4xl font-bold leading-tight text-cream sm:text-6xl">
             Your Trusted Property Partner in Johor Bahru
           </h1>
           {/* Agency details — from Nurul Balqis's business card */}
-          <div className="mt-6 max-w-xl rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
-            <p className="font-display text-base font-bold text-cream">
+          <div className="mt-10 max-w-xl rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
+            <p className="font-display text-lg font-bold text-cream">
               {AGENCY_NAME} <span className="text-copper">{AGENCY_REG_NO}</span>
             </p>
-            <div className="mt-3 space-y-1.5 text-sm text-cream/85">
+            <div className="mt-4 space-y-1.5 text-lg text-cream/85">
               <p className="flex items-center gap-2">
                 <Phone className="h-3.5 w-3.5 shrink-0 text-copper" aria-hidden />
                 {AGENCY_PHONE}
