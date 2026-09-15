@@ -33,7 +33,7 @@ export default function ShopLotClient() {
         items={[{ label: "Home", href: "/" }, { label: "Shop Lot" }]}
       />
       <h1 className="font-display text-3xl font-bold text-espresso md:text-4xl">
-        Shop Lots For Sale in Johor
+        Shop Lots For Rent/Sale in Johor
       </h1>
       <p className="mt-2 text-warm-grey">
         {loading ? "Loading listings…" : `${filtered.length} properties available`}
