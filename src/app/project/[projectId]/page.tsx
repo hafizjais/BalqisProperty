@@ -57,6 +57,9 @@ export default async function ProjectDetailPage({ params }: Props) {
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
         <div className="lg:col-span-3">
+          <h2 className="mb-3 font-display text-lg font-bold text-espresso">
+            Photos
+          </h2>
           <Gallery images={project.images} title={project.projectName} />
         </div>
         {project.siteFloorMap.length > 0 && (
