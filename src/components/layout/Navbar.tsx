@@ -33,6 +33,7 @@ export default function Navbar() {
             alt=""
             width={36}
             height={36}
+            unoptimized={false}
             className="h-9 w-9 shrink-0 rounded-full object-cover"
             aria-hidden
           />

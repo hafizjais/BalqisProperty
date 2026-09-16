@@ -28,6 +28,7 @@ export default function HeroSection() {
         alt=""
         fill
         priority
+        unoptimized={false}
         sizes="100vw"
         className="object-cover opacity-50"
         aria-hidden
@@ -135,6 +136,7 @@ export default function HeroSection() {
                 alt="Nurul Balqis, property agent in Johor Bahru"
                 fill
                 priority
+                unoptimized={false}
                 sizes="384px"
                 className="object-cover object-top"
               />

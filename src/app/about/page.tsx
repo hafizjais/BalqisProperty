@@ -26,6 +26,7 @@ export default function AboutPage() {
             alt="Nurul Balqis, property agent specializing in Johor Bahru and the greater Iskandar Malaysia region."
             fill
             priority
+            unoptimized={false}
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover object-top"
           />
