@@ -29,7 +29,7 @@ export default function Navbar() {
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2 font-display text-xl font-bold tracking-wide">
           <Image
-            src="/logo_property.png"
+            src="/logo_company.png"
             alt=""
             width={36}
             height={36}
