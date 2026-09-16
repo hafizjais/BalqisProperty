@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { MessageCircle, Instagram, Award } from "lucide-react";
+import { MessageCircle, Instagram } from "lucide-react";
 import Button from "@/components/ui/Button";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { JB_AREAS, INSTAGRAM_URL, waLink } from "@/lib/constants";
@@ -19,15 +19,15 @@ export default function AboutPage() {
       <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "About" }]} />
 
       {/* Split layout — mirror of the landing hero */}
-      <div className="grid items-start gap-10 lg:grid-cols-2">
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl shadow-card">
+      <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,320px)_1fr]">
+        <div className="relative mx-auto aspect-[4/5] w-full max-w-[280px] overflow-hidden rounded-2xl shadow-card lg:mx-0">
           <Image
             src="/Balqis.png"
             alt="Nurul Balqis, property agent specializing in Johor Bahru and the greater Iskandar Malaysia region."
             fill
             priority
             unoptimized={false}
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            sizes="(max-width: 1024px) 60vw, 280px"
             className="object-cover object-top"
           />
         </div>
@@ -76,6 +76,36 @@ export default function AboutPage() {
         </div>
       </div>
 
+      {/* Team */}
+      <section className="mt-16 grid items-center gap-10 lg:grid-cols-2">
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-card lg:order-2">
+          <Image
+            src="/Team_about.jpg"
+            alt="Nurul Balqis with the OD Legacy team."
+            fill
+            unoptimized={false}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover"
+          />
+        </div>
+
+        <div className="lg:order-1">
+          <h2 className="font-display text-2xl font-bold text-espresso">
+            Part of the OD Legacy family
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-espresso/90">
+            Standing alongside the OD Legacy team always reminds me why we do what we do.
+            It’s never just about closing deals or selling property, but about growing
+            together, showing up every day, and genuinely helping people secure something
+            lasting for their families. We choose to stay grounded, put in the work
+            quietly, and push each other toward bigger goals as one solid unit. I&apos;m
+            truly grateful to be surrounded by mentors and teammates who carry this much
+            hunger, discipline, and heart, and I couldn&apos;t be prouder to build our
+            legacy side by side with this family.
+          </p>
+        </div>
+      </section>
+
       {/* JB areas covered */}
       <section className="mt-16">
         <h2 className="font-display text-2xl font-bold text-espresso">
@@ -91,18 +121,6 @@ export default function AboutPage() {
             </span>
           ))}
         </div>
-      </section>
-
-      {/* TODO: Add credentials, awards, and certifications here */}
-      <section className="mt-16 rounded-2xl bg-sand p-8 text-center">
-        <Award className="mx-auto h-8 w-8 text-copper" aria-hidden />
-        <h2 className="mt-3 font-display text-2xl font-bold text-espresso">
-          Credentials &amp; Certifications
-        </h2>
-        <p className="mx-auto mt-2 max-w-md text-sm text-warm-grey">
-          Full credentials, awards and certifications will be listed here soon.
-          Ask Balqis directly for verification of licensing details.
-        </p>
       </section>
     </div>
   );
