@@ -55,6 +55,7 @@ export interface Project {
   projectName: string;
   developer: string;
   projectStage: string; // "New Launch" | "Under Construction" | "Ready to Move In" — blank until that column exists
+  completionYear: string; // e.g. "2027" — from the "completion year" Airtable column
   tenure: string;
   description: string;
   area: string;

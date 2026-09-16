@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, MessageCircle } from "lucide-react";
+import { Calendar, MapPin, MessageCircle } from "lucide-react";
 import Badge from "@/components/ui/Badge";
 import type { Project } from "@/lib/types";
 import { formatRM, waLink } from "@/lib/constants";
@@ -34,6 +34,12 @@ export default function ProjectCard({ project }: { project: Project }) {
         {project.projectStage && (
           <div className="absolute left-3 top-3 z-[2] flex gap-2">
             <Badge variant={project.projectStage.toLowerCase()}>{project.projectStage}</Badge>
+          </div>
+        )}
+        {project.completionYear && (
+          <div className="absolute right-3 top-3 z-[2] flex items-center gap-1 rounded-full bg-ink/75 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+            <Calendar className="h-3 w-3 shrink-0" aria-hidden />
+            Completion {project.completionYear}
           </div>
         )}
       </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { MapPin, MessageCircle } from "lucide-react";
+import { Calendar, MapPin, MessageCircle } from "lucide-react";
 import { fetchProject } from "@/lib/airtable-projects";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Badge from "@/components/ui/Badge";
@@ -78,6 +78,9 @@ export default async function ProjectDetailPage({ params }: Props) {
             <Badge variant={project.projectStage.toLowerCase()}>{project.projectStage}</Badge>
           )}
           {project.tenure && <Badge>{project.tenure}</Badge>}
+          {project.completionYear && (
+            <Badge>Completion {project.completionYear}</Badge>
+          )}
         </div>
 
         <h1 className="mt-3 font-display text-3xl font-bold text-espresso md:text-4xl">
@@ -92,6 +95,12 @@ export default async function ProjectDetailPage({ params }: Props) {
             .filter(Boolean)
             .join(", ")}
         </p>
+        {project.completionYear && (
+          <p className="mt-1.5 flex items-center gap-1.5 text-warm-grey">
+            <Calendar className="h-4 w-4 shrink-0 text-copper" aria-hidden />
+            Expected completion: {project.completionYear}
+          </p>
+        )}
         {project.priceFrom > 0 && (
           <p className="mt-3 font-display text-2xl font-bold text-copper">
             From {formatRM(project.priceFrom)}
