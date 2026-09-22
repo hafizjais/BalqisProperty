@@ -104,6 +104,11 @@ export default async function ProjectDetailPage({ params }: Props) {
             Expected completion: {project.completionYear}
           </p>
         )}
+        {project.rebate && (
+          <p className="mt-1.5 whitespace-pre-line text-warm-grey">
+            Rebate: {project.rebate}
+          </p>
+        )}
         {project.priceFrom > 0 && (
           <p className="mt-3 font-display text-2xl font-bold text-copper">
             From {formatRM(project.priceFrom)}

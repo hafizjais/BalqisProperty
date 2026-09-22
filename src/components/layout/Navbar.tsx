@@ -10,6 +10,7 @@ import { waLink } from "@/lib/constants";
 const links = [
   { href: "/", label: "Home" },
   { href: "/subsale", label: "Subsale" },
+  { href: "/rental", label: "Rental" },
   { href: "/project", label: "Project" },
   { href: "/commercial/shop-lot", label: "Shop Lot" },
   { href: "/commercial/land", label: "Land" },

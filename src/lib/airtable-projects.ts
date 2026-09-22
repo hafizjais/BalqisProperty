@@ -36,6 +36,7 @@ interface RawRow {
   slug: string;
   developer: string;
   completionYear: string;
+  rebate: string;
   tenure: string;
   description: string;
   area: string;
@@ -70,6 +71,7 @@ function parseRow(record: any): RawRow {
     completionYear: String(
       anyKey(f, "completion year", "Completion Year", "completionYear") || ""
     ).trim(),
+    rebate: String(f.rebate || "").trim(),
     tenure: joinField(f.tenure),
     description: f.description || "",
     area: joinField(f.area),
@@ -172,6 +174,7 @@ function groupIntoProjects(rows: RawRow[]): Project[] {
       developer: first.developer,
       projectStage: "",
       completionYear: first.completionYear,
+      rebate: first.rebate,
       tenure: first.tenure,
       description: first.description,
       area: first.area,

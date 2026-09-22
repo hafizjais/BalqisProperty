@@ -56,6 +56,7 @@ export interface Project {
   developer: string;
   projectStage: string; // "New Launch" | "Under Construction" | "Ready to Move In" — blank until that column exists
   completionYear: string; // e.g. "2027" — from the "completion year" Airtable column
+  rebate: string; // long text, e.g. "Bumi 10%\nNon Bumi 10% + 5%" — blank if not set for this project
   tenure: string;
   description: string;
   area: string;
@@ -96,4 +97,29 @@ export interface LandListing {
   description: string;
   postedDate: string;
   mapEmbedUrl: string;
+}
+
+// One row in the "rental" Airtable table = one whole-unit monthly rental
+// listing. Field names/shape are rental-specific and don't overlap with the
+// main Listing schema — there's no dedicated id column in the sheet, so
+// `houseId` (Airtable's own "house_id" field, e.g. "House - 013") is used
+// as the stable identifier and URL slug instead.
+export interface RentalListing {
+  id: string; // slugified houseId, e.g. "house-013"
+  houseId: string; // raw Airtable value, e.g. "House - 013"
+  title: string;
+  type: string; // "Apartment" | "Flat" | "Condominium" | "Double Storey" | "Single storey" ...
+  status: string; // "available" | ... — from property_status
+  bedrooms: number | null;
+  bathrooms: number | null;
+  price: number; // monthly rental price in RM
+  area: string;
+  areas: string[];
+  city: string;
+  address: string;
+  description: string;
+  featured: boolean;
+  coverImage: string;
+  images: string[];
+  postedDate: string;
 }
