@@ -22,7 +22,7 @@ export default function AboutPage() {
       <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,320px)_1fr]">
         <div className="relative mx-auto aspect-[4/5] w-full max-w-[280px] overflow-hidden rounded-2xl shadow-card lg:mx-0">
           <Image
-            src="/Balqis.png"
+            src="/Profile2.jpeg"
             alt="Nurul Balqis, property agent specializing in Johor Bahru and the greater Iskandar Malaysia region."
             fill
             priority

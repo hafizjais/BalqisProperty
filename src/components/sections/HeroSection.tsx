@@ -132,7 +132,7 @@ export default function HeroSection() {
             />
             <div className="relative h-full w-full overflow-hidden rounded-full border-4 border-copper shadow-card-hover">
               <Image
-                src="/Balqis.png"
+                src="Profile2.jpeg"
                 alt="Nurul Balqis, property agent in Johor Bahru"
                 fill
                 priority
