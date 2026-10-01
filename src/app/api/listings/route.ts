@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchAllListings } from "@/lib/airtable";
+import { fetchAllListings } from "@/lib/listings";
 
 // Without this, Route Handlers can get frozen on a stale cached response
 // indefinitely (surviving even redeploys) instead of re-fetching Airtable —
@@ -13,7 +13,8 @@ export async function GET(request: Request) {
   try {
     const listings = await fetchAllListings(listingType);
     return NextResponse.json(listings);
-  } catch {
+  } catch (err) {
+    console.error("Listings fetch failed:", err);
     return NextResponse.json({ error: "Listings fetch failed" }, { status: 502 });
   }
 }

@@ -5,6 +5,7 @@ const nextConfig = {
       { protocol: "https", hostname: "**.airtableusercontent.com" },
       { protocol: "https", hostname: "**.airtable.com" },
       { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "cdn.sanity.io" },
     ],
     // Airtable already serves these from its own CDN, and Vercel's paid
     // image-optimization quota was getting exhausted resizing them —

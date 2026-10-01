@@ -51,11 +51,35 @@ export function escapeFormulaValue(value: string): string {
   return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
 }
 
-// Paginated fetch of every record in an Airtable table. Always fully
-// dynamic (cache: "no-store") — Airtable's attachment URLs are short-lived
-// and must come from a fresh API call every time; time-based revalidation
-// was previously found to get stuck serving hours-stale responses.
-export async function fetchAllAirtableRecords(
+// A plain in-memory TTL cache — deliberately NOT Next.js's built-in fetch
+// cache. That built-in cache was tried before (time-based `revalidate`) and
+// was observed getting stuck serving an hours-stale response on Vercel,
+// surviving even redeploys. This Map is explicit: every read checks
+// `expiresAt` itself, so there's no framework-level caching layer that can
+// silently wedge — worst case it just refetches.
+const cache = new Map<string, { data: any; expiresAt: number }>();
+
+export async function cachedFetch<T>(
+  key: string,
+  ttlMs: number,
+  fetcher: () => Promise<T>
+): Promise<T> {
+  const hit = cache.get(key);
+  if (hit && hit.expiresAt > Date.now()) return hit.data as T;
+
+  const data = await fetcher();
+  cache.set(key, { data, expiresAt: Date.now() + ttlMs });
+  return data;
+}
+
+// Airtable attachment URLs are short-lived, but not so short-lived that a
+// ~60s in-memory cache breaks them — this just collapses the burst of
+// requests that a page full of listing cards (or several visitors within
+// the same minute) would otherwise send.
+const RECORDS_TTL_MS = 60_000;
+
+// Paginated fetch of every record in an Airtable table, cached per baseUrl.
+async function fetchAllAirtableRecordsUncached(
   baseUrl: string,
   pat: string
 ): Promise<any[]> {
@@ -83,4 +107,13 @@ export async function fetchAllAirtableRecords(
   } while (offset);
 
   return allRecords;
+}
+
+export async function fetchAllAirtableRecords(
+  baseUrl: string,
+  pat: string
+): Promise<any[]> {
+  return cachedFetch(`records:${baseUrl}`, RECORDS_TTL_MS, () =>
+    fetchAllAirtableRecordsUncached(baseUrl, pat)
+  );
 }

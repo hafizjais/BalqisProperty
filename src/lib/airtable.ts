@@ -6,7 +6,10 @@ import {
   toList,
   attachmentUrls,
   extractMapSrc,
+  cachedFetch,
 } from "./airtable-helpers";
+
+const RECORDS_TTL_MS = 60_000;
 
 // Airtable Personal Access Token needs the data.records:read scope on this base.
 const PAT = process.env.AIRTABLE_PAT!;
@@ -78,7 +81,7 @@ function isRealRecord(record: any): boolean {
 // ---------------------------------------------------------------------------
 // Fetching
 // ---------------------------------------------------------------------------
-async function fetchAllRecords(): Promise<any[]> {
+async function fetchAllRecordsUncached(): Promise<any[]> {
   let allRecords: any[] = [];
   let offset: string | null = null;
 
@@ -108,6 +111,10 @@ async function fetchAllRecords(): Promise<any[]> {
   } while (offset);
 
   return allRecords;
+}
+
+function fetchAllRecords(): Promise<any[]> {
+  return cachedFetch(`records:${BASE_URL}`, RECORDS_TTL_MS, fetchAllRecordsUncached);
 }
 
 export async function fetchAllListings(
@@ -143,17 +150,20 @@ export async function fetchListing(id: string): Promise<Listing | null> {
   url.searchParams.set("maxRecords", "1");
   url.searchParams.set("filterByFormula", `{id}="${escapeFormulaValue(decoded)}"`);
 
-  const res = await fetch(url.toString(), {
-    headers: { Authorization: `Bearer ${PAT}` },
-    cache: "no-store",
+  const data = await cachedFetch(`record:${url.toString()}`, RECORDS_TTL_MS, async () => {
+    const res = await fetch(url.toString(), {
+      headers: { Authorization: `Bearer ${PAT}` },
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(`Airtable fetch failed (${res.status}): ${body.slice(0, 200)}`);
+    }
+
+    return res.json();
   });
 
-  if (!res.ok) {
-    const body = await res.text().catch(() => "");
-    throw new Error(`Airtable fetch failed (${res.status}): ${body.slice(0, 200)}`);
-  }
-
-  const data = await res.json();
   const record = (data.records || [])[0];
   return record && isRealRecord(record) ? parseRecord(record, true) : null;
 }

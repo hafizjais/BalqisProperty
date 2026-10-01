@@ -7,7 +7,8 @@ export async function GET() {
   try {
     const shoplots = await fetchAllShoplots();
     return NextResponse.json(shoplots);
-  } catch {
+  } catch (err) {
+    console.error("Shoplots fetch failed:", err);
     return NextResponse.json({ error: "Shoplots fetch failed" }, { status: 502 });
   }
 }

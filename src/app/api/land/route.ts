@@ -7,7 +7,8 @@ export async function GET() {
   try {
     const land = await fetchAllLand();
     return NextResponse.json(land);
-  } catch {
+  } catch (err) {
+    console.error("Land fetch failed:", err);
     return NextResponse.json({ error: "Land fetch failed" }, { status: 502 });
   }
 }

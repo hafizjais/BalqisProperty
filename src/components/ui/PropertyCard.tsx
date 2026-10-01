@@ -111,25 +111,25 @@ export default function PropertyCard({
               ))}
             </div>
           ) : (
-            <div className="flex items-center gap-3 text-sm text-warm-grey">
-              {listing.bedrooms !== null && (
-                <span className="flex items-center gap-1">
-                  <BedDouble className="h-4 w-4" aria-hidden />
-                  {listing.bedrooms}
-                </span>
-              )}
-              {listing.bathrooms !== null && (
-                <span className="flex items-center gap-1">
-                  <Bath className="h-4 w-4" aria-hidden />
-                  {listing.bathrooms}
-                </span>
-              )}
-              {listing.builtUpSqft !== null && (
-                <span className="flex items-center gap-1">
-                  <Ruler className="h-4 w-4" aria-hidden />
-                  {listing.builtUpSqft.toLocaleString()} sqft
-                </span>
-              )}
+            // Each spec carries its own text label and a "·" separator — with
+            // icon-only labels the numbers ran together as plain text
+            // (bed 4 + bath 3 + 1,540 sqft read as "431,540 sqft").
+            <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm text-warm-grey">
+              {[
+                listing.bedrooms ? { icon: BedDouble, text: `${listing.bedrooms} bed` } : null,
+                listing.bathrooms ? { icon: Bath, text: `${listing.bathrooms} bath` } : null,
+                listing.builtUpSqft
+                  ? { icon: Ruler, text: `${listing.builtUpSqft.toLocaleString()} sqft` }
+                  : null,
+              ]
+                .filter((s): s is NonNullable<typeof s> => s !== null)
+                .map(({ icon: Icon, text }, i) => (
+                  <span key={text} className="flex items-center gap-1">
+                    {i > 0 && <span aria-hidden>·</span>}
+                    <Icon className="h-4 w-4" aria-hidden />
+                    {text}
+                  </span>
+                ))}
             </div>
           )}
 
