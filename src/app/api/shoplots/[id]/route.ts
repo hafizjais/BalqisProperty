@@ -13,7 +13,8 @@ export async function GET(
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
     return NextResponse.json(shoplot);
-  } catch {
+  } catch (err) {
+    console.error("Shoplot fetch failed:", err);
     return NextResponse.json({ error: "Shoplot fetch failed" }, { status: 502 });
   }
 }

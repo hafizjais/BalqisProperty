@@ -1,5 +1,7 @@
 import type { Project, ProjectUnitType } from "./types";
-import { parseNum, parseBool, joinField, toList, attachmentUrls, extractMapSrc } from "./airtable-helpers";
+import { parseNum, parseBool, joinField, toList, attachmentUrls, extractMapSrc, cachedFetch } from "./airtable-helpers";
+
+const RECORDS_TTL_MS = 60_000;
 
 // Same base + PAT as the listings table, but a separate sheet/table for
 // developer projects — set AIRTABLE_PROJECT_TABLE_ID in .env.local to that
@@ -99,7 +101,7 @@ function isRealRow(record: any): boolean {
     Boolean(String(record.fields?.title || "").trim());
 }
 
-async function fetchAllRows(): Promise<any[]> {
+async function fetchAllRowsUncached(): Promise<any[]> {
   let allRecords: any[] = [];
   let offset: string | null = null;
 
@@ -108,10 +110,6 @@ async function fetchAllRows(): Promise<any[]> {
     url.searchParams.set("pageSize", "100");
     if (offset) url.searchParams.set("offset", offset);
 
-    // Airtable's attachment URLs are short-lived and must come from a fresh
-    // API call each time — time-based revalidation (next.revalidate) was
-    // observed getting stuck on a stale cached response on Vercel, so this
-    // is fully dynamic instead.
     const res = await fetch(url.toString(), {
       headers: { Authorization: `Bearer ${PAT}` },
       cache: "no-store",
@@ -128,6 +126,10 @@ async function fetchAllRows(): Promise<any[]> {
   } while (offset);
 
   return allRecords;
+}
+
+function fetchAllRows(): Promise<any[]> {
+  return cachedFetch(`records:${BASE_URL}`, RECORDS_TTL_MS, fetchAllRowsUncached);
 }
 
 // Group unit-type rows into one Project per distinct project slug.

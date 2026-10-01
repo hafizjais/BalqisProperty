@@ -8,7 +8,10 @@ import {
   extractMapSrc,
   fetchAllAirtableRecords,
   escapeFormulaValue,
+  cachedFetch,
 } from "./airtable-helpers";
+
+const RECORDS_TTL_MS = 60_000;
 
 const PAT = process.env.AIRTABLE_PAT!;
 const BASE_ID = process.env.AIRTABLE_BASE_ID!;
@@ -65,17 +68,20 @@ export async function fetchLand(id: string): Promise<LandListing | null> {
   url.searchParams.set("maxRecords", "1");
   url.searchParams.set("filterByFormula", `{land_id}="${escapeFormulaValue(decoded)}"`);
 
-  const res = await fetch(url.toString(), {
-    headers: { Authorization: `Bearer ${PAT}` },
-    cache: "no-store",
+  const data = await cachedFetch(`record:${url.toString()}`, RECORDS_TTL_MS, async () => {
+    const res = await fetch(url.toString(), {
+      headers: { Authorization: `Bearer ${PAT}` },
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(`Airtable fetch failed (${res.status}): ${body.slice(0, 200)}`);
+    }
+
+    return res.json();
   });
 
-  if (!res.ok) {
-    const body = await res.text().catch(() => "");
-    throw new Error(`Airtable fetch failed (${res.status}): ${body.slice(0, 200)}`);
-  }
-
-  const data = await res.json();
   const record = (data.records || [])[0];
   return record && isRealRecord(record) ? parseRecord(record, true) : null;
 }

@@ -13,7 +13,8 @@ export async function GET(
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
     return NextResponse.json(land);
-  } catch {
+  } catch (err) {
+    console.error("Land fetch failed:", err);
     return NextResponse.json({ error: "Land fetch failed" }, { status: 502 });
   }
 }

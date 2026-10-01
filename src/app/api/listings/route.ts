@@ -13,7 +13,8 @@ export async function GET(request: Request) {
   try {
     const listings = await fetchAllListings(listingType);
     return NextResponse.json(listings);
-  } catch {
+  } catch (err) {
+    console.error("Listings fetch failed:", err);
     return NextResponse.json({ error: "Listings fetch failed" }, { status: 502 });
   }
 }

@@ -13,7 +13,8 @@ export async function GET(
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
     return NextResponse.json(listing);
-  } catch {
+  } catch (err) {
+    console.error("Listings fetch failed:", err);
     return NextResponse.json({ error: "Listings fetch failed" }, { status: 502 });
   }
 }
