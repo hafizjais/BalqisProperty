@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchAllListings } from "@/lib/airtable";
+import { fetchAllListings } from "@/lib/listings";
 
 // Without this, Route Handlers can get frozen on a stale cached response
 // indefinitely (surviving even redeploys) instead of re-fetching Airtable —

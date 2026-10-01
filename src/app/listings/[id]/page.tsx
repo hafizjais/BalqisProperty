@@ -10,7 +10,7 @@ import {
   MapPin,
   CheckCircle2,
 } from "lucide-react";
-import { fetchListing } from "@/lib/airtable";
+import { fetchListing } from "@/lib/listings";
 import { isShopLot, isLand } from "@/lib/filters";
 import { priceLabel } from "@/lib/constants";
 import Breadcrumb from "@/components/ui/Breadcrumb";

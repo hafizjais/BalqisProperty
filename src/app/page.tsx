@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { TrainFront, Map, Wallet, MessageCircle } from "lucide-react";
-import { fetchAllListings } from "@/lib/airtable";
+import { fetchAllListings } from "@/lib/listings";
 import HeroSection from "@/components/sections/HeroSection";
 import CategoryCards from "@/components/sections/CategoryCards";
 import FeaturedListings from "@/components/sections/FeaturedListings";
