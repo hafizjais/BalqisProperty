@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LandPlot, Ruler, MapPin, MessageCircle } from "lucide-react";
-import { fetchLand } from "@/lib/airtable-land";
+import { fetchLand } from "@/lib/land";
 import { formatRM, waLink } from "@/lib/constants";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Badge from "@/components/ui/Badge";
