@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Ruler, LandPlot, Car, MapPin, CheckCircle2 } from "lucide-react";
-import { fetchShoplot } from "@/lib/airtable-shoplot";
+import { fetchShoplot } from "@/lib/shoplot";
 import { priceLabel } from "@/lib/constants";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Badge, { listingTypeLabel } from "@/components/ui/Badge";
