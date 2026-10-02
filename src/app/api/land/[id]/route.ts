@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchLand } from "@/lib/airtable-land";
+import { fetchLand } from "@/lib/land";
 
 export const dynamic = "force-dynamic";
 
