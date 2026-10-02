@@ -22,7 +22,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid secret" }, { status: 401 });
   }
 
-  revalidateTag("listings");
+  // Revalidate every known data tag unconditionally rather than branching on
+  // which document type changed — revalidateTag on a tag with nothing cached
+  // is a no-op, and this keeps one webhook endpoint working for every table
+  // as more of them move to Sanity, with no per-table webhook config needed.
+  for (const tag of ["listings", "rental"]) revalidateTag(tag);
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }
 

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchRental } from "@/lib/airtable-rental";
+import { fetchRental } from "@/lib/rental";
 
 export const dynamic = "force-dynamic";
 

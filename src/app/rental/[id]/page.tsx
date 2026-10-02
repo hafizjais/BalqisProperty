@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BedDouble, Bath, MapPin, MessageCircle } from "lucide-react";
-import { fetchRental } from "@/lib/airtable-rental";
+import { fetchRental } from "@/lib/rental";
 import { formatRM, waLink } from "@/lib/constants";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Badge from "@/components/ui/Badge";
