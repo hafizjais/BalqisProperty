@@ -50,10 +50,13 @@ export default function CategoryCards() {
   return (
     <section className="relative z-10 -mt-24 pb-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        {/* Mobile/tablet: simple stacked grid. Desktop (lg+): bento layout —
+            one tall featured card on the left, a 2x2 grid on the right. */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-[260px]">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.href}
+              className={i === 0 ? "lg:row-span-2" : undefined}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
@@ -61,7 +64,7 @@ export default function CategoryCards() {
             >
               <Link
                 href={cat.href}
-                className="group relative flex h-60 flex-col justify-end overflow-hidden rounded-2xl border border-white/10 bg-graphite shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:border-copper/50 hover:shadow-card-hover"
+                className="group relative flex h-60 flex-col justify-end overflow-hidden rounded-2xl border border-white/10 bg-graphite shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:border-copper/50 hover:shadow-card-hover lg:h-full"
               >
                 {cat.photo && (
                   <Image
@@ -75,14 +78,24 @@ export default function CategoryCards() {
                   />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/45 to-ink/10" />
-                <div className="relative p-5">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-ink/70 text-copper backdrop-blur-sm">
-                    <cat.icon className="h-5 w-5" aria-hidden />
+                <div className={`relative p-5 ${i === 0 ? "lg:p-7" : ""}`}>
+                  <span
+                    className={`flex items-center justify-center rounded-xl bg-ink/70 text-copper backdrop-blur-sm ${
+                      i === 0 ? "h-10 w-10 lg:h-12 lg:w-12" : "h-10 w-10"
+                    }`}
+                  >
+                    <cat.icon className={i === 0 ? "h-5 w-5 lg:h-6 lg:w-6" : "h-5 w-5"} aria-hidden />
                   </span>
-                  <h3 className="mt-3 text-lg font-semibold text-cream">
+                  <h3
+                    className={`mt-3 font-semibold text-cream ${
+                      i === 0 ? "text-lg lg:text-2xl" : "text-lg"
+                    }`}
+                  >
                     {cat.title}
                   </h3>
-                  <p className="mt-0.5 text-sm text-cream/80">{cat.tagline}</p>
+                  <p className={`mt-0.5 text-cream/80 ${i === 0 ? "text-sm lg:text-base" : "text-sm"}`}>
+                    {cat.tagline}
+                  </p>
                   <span className="mt-3 flex items-center gap-1 text-sm font-semibold text-copper">
                     Explore
                     <ArrowRight
