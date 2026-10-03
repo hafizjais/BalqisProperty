@@ -6,6 +6,8 @@ import { applyFilters, defaultFilters, isCommercial } from "@/lib/filters";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import FilterBar from "@/components/sections/FilterBar";
 import ListingsResults from "@/components/sections/ListingsResults";
+import { SearchQueryReader, SearchQueryBanner } from "@/components/ui/SearchQuery";
+import { matchesQuery } from "@/lib/search";
 
 const config = {
   propertyTypes: ["Terrace", "Single Storey", "Double Storey", "Bungalow", "Apartment", "Service Apartment"],
@@ -19,11 +21,20 @@ const config = {
 export default function SubsaleClient() {
   const { listings, loading, error } = useListings("sale");
   const [filters, setFilters] = useState(() => defaultFilters(100000, 5000000));
+  const [query, setQuery] = useState(""); // keyword from the homepage hero search (?q=)
 
   // Shop lots and land live under /commercial — Subsale shows homes only
   const filtered = useMemo(
-    () => applyFilters(listings.filter((l) => !isCommercial(l)), filters),
-    [listings, filters]
+    () =>
+      applyFilters(
+        listings.filter(
+          (l) =>
+            !isCommercial(l) &&
+            matchesQuery(query, [l.title, l.areas, l.address, l.subType, l.city])
+        ),
+        filters
+      ),
+    [listings, filters, query]
   );
 
   // Every area currently in use across listings — a new area added in
@@ -44,6 +55,8 @@ export default function SubsaleClient() {
       <p className="mt-2 text-warm-grey">
         {loading ? "Loading listings…" : `${filtered.length} listings available`}
       </p>
+      <SearchQueryReader onChange={setQuery} />
+      <SearchQueryBanner query={query} />
 
       <div className="mt-6">
         <FilterBar

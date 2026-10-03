@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { TrainFront, Map, Wallet, MessageCircle } from "lucide-react";
 import { fetchAllListings } from "@/lib/listings";
+import { fetchAllRental } from "@/lib/rental";
+import { fetchAllShoplots } from "@/lib/shoplot";
+import { fetchAllLand } from "@/lib/land";
+import { fetchAllProjects } from "@/lib/project";
 import HeroSection from "@/components/sections/HeroSection";
 import CategoryCards from "@/components/sections/CategoryCards";
 import FeaturedListings from "@/components/sections/FeaturedListings";
@@ -31,12 +35,48 @@ const whyJB = [
   },
 ];
 
+// Areas too broad to be a useful one-tap search keyword.
+const GENERIC_AREAS = new Set(["johor bahru", "johor", "jb"]);
+
 export default async function HomePage() {
-  const listings = await fetchAllListings().catch(() => []);
+  const [listings, rental, shoplots, land, projects] = await Promise.all([
+    fetchAllListings().catch(() => []),
+    fetchAllRental().catch(() => []),
+    fetchAllShoplots().catch(() => []),
+    fetchAllLand().catch(() => []),
+    fetchAllProjects().catch(() => []),
+  ]);
+
+  // Hero search data, from live listings across every category: the most
+  // common areas become one-tap keywords, and every area plus every project
+  // name feeds the search box's suggestions.
+  const allAreas = [listings, rental, shoplots, land, projects].flatMap((items) =>
+    items.flatMap((item) => item.areas)
+  );
+  // Plain object rather than Map — `Map` here is the lucide icon import.
+  const areaCounts: Record<string, number> = {};
+  for (const area of allAreas) {
+    if (!GENERIC_AREAS.has(area.toLowerCase())) {
+      areaCounts[area] = (areaCounts[area] || 0) + 1;
+    }
+  }
+  const popularAreas = Object.entries(areaCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6)
+    .map(([area]) => area);
+  const suggestions = Array.from(
+    new Set([...allAreas, ...projects.map((p) => p.projectName)].filter(Boolean))
+  ).sort();
+  const totalCount =
+    listings.length + rental.length + shoplots.length + land.length + projects.length;
 
   return (
     <>
-      <HeroSection />
+      <HeroSection
+        popularAreas={popularAreas}
+        suggestions={suggestions}
+        totalCount={totalCount}
+      />
       {/* Category cards overlap the hero's bottom edge */}
       <CategoryCards />
 

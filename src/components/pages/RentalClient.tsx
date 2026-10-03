@@ -4,6 +4,8 @@ import { useState, useMemo } from "react";
 import { useRental } from "@/hooks/useRental";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import RentalResults from "@/components/sections/RentalResults";
+import { SearchQueryReader, SearchQueryBanner } from "@/components/ui/SearchQuery";
+import { matchesQuery } from "@/lib/search";
 
 const selectCls =
   "w-full rounded-lg border border-peach bg-graphite px-3 py-2 text-sm text-espresso";
@@ -13,6 +15,7 @@ export default function RentalClient() {
   const [type, setType] = useState("any");
   const [bedrooms, setBedrooms] = useState("any");
   const [sort, setSort] = useState("default");
+  const [query, setQuery] = useState(""); // keyword from the homepage hero search (?q=)
 
   // Every property type currently in use — a new type added in Airtable
   // shows up here automatically, no code change needed.
@@ -22,7 +25,7 @@ export default function RentalClient() {
   );
 
   const filtered = useMemo(() => {
-    let list = rental;
+    let list = rental.filter((r) => matchesQuery(query, [r.title, r.areas, r.address, r.type]));
     if (type !== "any") list = list.filter((r) => r.type === type);
     if (bedrooms !== "any") {
       list = list.filter((r) =>
@@ -32,7 +35,7 @@ export default function RentalClient() {
     if (sort === "price-asc") list = [...list].sort((a, b) => a.price - b.price);
     if (sort === "price-desc") list = [...list].sort((a, b) => b.price - a.price);
     return list;
-  }, [rental, type, bedrooms, sort]);
+  }, [rental, type, bedrooms, sort, query]);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
@@ -43,6 +46,8 @@ export default function RentalClient() {
       <p className="mt-2 text-warm-grey">
         {loading ? "Loading listings…" : `${filtered.length} properties available for rent`}
       </p>
+      <SearchQueryReader onChange={setQuery} />
+      <SearchQueryBanner query={query} />
 
       <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         <div>
