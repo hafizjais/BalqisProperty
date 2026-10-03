@@ -26,7 +26,7 @@ export async function POST(request: Request) {
   // which document type changed — revalidateTag on a tag with nothing cached
   // is a no-op, and this keeps one webhook endpoint working for every table
   // as more of them move to Sanity, with no per-table webhook config needed.
-  for (const tag of ["listings", "rental", "shoplots", "land"]) revalidateTag(tag);
+  for (const tag of ["listings", "rental", "shoplots", "land", "projects"]) revalidateTag(tag);
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }
 

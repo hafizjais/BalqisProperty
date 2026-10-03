@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Calendar, MapPin, MessageCircle } from "lucide-react";
-import { fetchProject } from "@/lib/airtable-projects";
+import { fetchProject } from "@/lib/project";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Badge from "@/components/ui/Badge";
 import Gallery from "@/components/listing/Gallery";
