@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchAllProjects } from "@/lib/airtable-projects";
+import { fetchAllProjects } from "@/lib/project";
 
 export const dynamic = "force-dynamic";
 
