@@ -194,48 +194,49 @@ export default function HeroSection({
         </motion.div>
 
         {/* Talk to Balqis directly */}
-        <motion.div
-          {...fadeUp(0.5)}
-          className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-sm text-cream/85"
-        >
-          <a
-            href={waLink("Hi Balqis, I'm looking for property in JB. Can you help?")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 font-semibold text-white transition-colors hover:bg-[#1eb857]"
-          >
-            <MessageCircle className="h-4 w-4" aria-hidden />
-            WhatsApp Balqis
-          </a>
-          <a
-            href={TELEGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-[#229ED9] px-4 py-2 font-semibold text-white transition-colors hover:bg-[#1c86b8]"
-          >
-            <Send className="h-4 w-4" aria-hidden />
-            Telegram: Rental
-          </a>
-          <a
-            href={TELEGRAM_SUBSALE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-[#229ED9] px-4 py-2 font-semibold text-white transition-colors hover:bg-[#1c86b8]"
-          >
-            <Send className="h-4 w-4" aria-hidden />
-            Telegram: Subsale &amp; Land
-          </a>
-          <a
-            href={`tel:${AGENCY_PHONE.replace(/\s/g, "")}`}
-            className="inline-flex items-center gap-1.5 hover:text-copper"
-          >
-            <Phone className="h-4 w-4" aria-hidden />
-            {AGENCY_PHONE}
-          </a>
-          <a href={`mailto:${AGENCY_EMAIL}`} className="inline-flex items-center gap-1.5 hover:text-copper">
-            <Mail className="h-4 w-4" aria-hidden />
-            {AGENCY_EMAIL}
-          </a>
+        <motion.div {...fadeUp(0.5)} className="mt-8 flex flex-col items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-sm text-cream/85">
+            <a
+              href={waLink("Hi Balqis, I'm looking for property in JB. Can you help?")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 font-semibold text-white transition-colors hover:bg-[#1eb857]"
+            >
+              <MessageCircle className="h-4 w-4" aria-hidden />
+              WhatsApp Balqis
+            </a>
+            <a
+              href={TELEGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#229ED9] px-4 py-2 font-semibold text-white transition-colors hover:bg-[#1c86b8]"
+            >
+              <Send className="h-4 w-4" aria-hidden />
+              Telegram: Rental
+            </a>
+            <a
+              href={TELEGRAM_SUBSALE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#229ED9] px-4 py-2 font-semibold text-white transition-colors hover:bg-[#1c86b8]"
+            >
+              <Send className="h-4 w-4" aria-hidden />
+              Telegram: Subsale &amp; Land
+            </a>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-cream/85">
+            <a
+              href={`tel:${AGENCY_PHONE.replace(/\s/g, "")}`}
+              className="inline-flex items-center gap-1.5 hover:text-copper"
+            >
+              <Phone className="h-4 w-4" aria-hidden />
+              {AGENCY_PHONE}
+            </a>
+            <a href={`mailto:${AGENCY_EMAIL}`} className="inline-flex items-center gap-1.5 hover:text-copper">
+              <Mail className="h-4 w-4" aria-hidden />
+              {AGENCY_EMAIL}
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>
