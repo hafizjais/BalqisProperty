@@ -6,6 +6,8 @@ import { applyFilters, defaultFilters } from "@/lib/filters";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import FilterBar from "@/components/sections/FilterBar";
 import ListingsResults from "@/components/sections/ListingsResults";
+import { SearchQueryReader, SearchQueryBanner } from "@/components/ui/SearchQuery";
+import { matchesQuery } from "@/lib/search";
 
 const config = {
   priceMin: 0,
@@ -17,8 +19,16 @@ const config = {
 export default function ShopLotClient() {
   const { shoplots, loading, error } = useShoplots();
   const [filters, setFilters] = useState(() => defaultFilters(0, 30000));
+  const [query, setQuery] = useState(""); // keyword from the homepage hero search (?q=)
 
-  const filtered = useMemo(() => applyFilters(shoplots, filters), [shoplots, filters]);
+  const filtered = useMemo(
+    () =>
+      applyFilters(
+        shoplots.filter((l) => matchesQuery(query, [l.title, l.areas, l.address, l.subType, l.city])),
+        filters
+      ),
+    [shoplots, filters, query]
+  );
 
   // Every area currently in use across shop lot listings — a new area
   // added in Airtable shows up in the filter automatically.
@@ -38,6 +48,8 @@ export default function ShopLotClient() {
       <p className="mt-2 text-warm-grey">
         {loading ? "Loading listings…" : `${filtered.length} properties available`}
       </p>
+      <SearchQueryReader onChange={setQuery} />
+      <SearchQueryBanner query={query} />
 
       <div className="mt-6">
         <FilterBar
