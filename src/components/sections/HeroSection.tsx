@@ -211,7 +211,7 @@ export default function HeroSection({
             href={TELEGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 hover:text-copper"
+            className="inline-flex items-center gap-2 rounded-full bg-[#229ED9] px-4 py-2 font-semibold text-white transition-colors hover:bg-[#1c86b8]"
           >
             <Send className="h-4 w-4" aria-hidden />
             Telegram: Rental
@@ -220,7 +220,7 @@ export default function HeroSection({
             href={TELEGRAM_SUBSALE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 hover:text-copper"
+            className="inline-flex items-center gap-2 rounded-full bg-[#229ED9] px-4 py-2 font-semibold text-white transition-colors hover:bg-[#1c86b8]"
           >
             <Send className="h-4 w-4" aria-hidden />
             Telegram: Subsale &amp; Land
